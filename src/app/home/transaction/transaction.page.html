@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">Transactions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar  animated="true" placeholder="Search History" [(ngModel)]="search" style="background-color:dimgrey"></ion-searchbar>
+  <ion-list [inset]="true">
+    <ion-list-header>
+      <ion-label>TRANSACTIONS HISTORY</ion-label>
+    </ion-list-header>
+    <ion-item lines="none" *ngFor="let item of data | filter:search:filterKeys">
+      <ion-icon slot="start" name="cash" color="primary"></ion-icon>
+      <ion-label size="large" class="ion-text-wrap">
+        <b>{{item.vendor}}</b>
+        <p>
+          {{item?.time}}
+        </p>
+      </ion-label>
+      <ion-text slot="end" [color]="item?.amount > 0 ? 'success' : 'danger'">₹{{item?.amount}}</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

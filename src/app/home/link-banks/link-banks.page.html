@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-item lines="none">
+    <ion-avatar slot="end" (click)="toggleMenu()">
+      <img src="assets/icons/4.png" />
+    </ion-avatar>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row class="animate__animated animate__fadeInTopLeft animate__faster ion-justify-content-center ion-text-center">
+    <ion-col size="12" class="ion-justify-content-center ion-text-center">
+      <ngx-payment-card #ngxPaymentCard
+      [IBAN]="cNumber?.value"
+      [securityCode]="sc?.value"
+      [name]="name?.value"
+      [expirationDate]="expiration?.value">
+</ngx-payment-card>
+    </ion-col>
+</ion-row>
+
+<div fxLayout="column" fxFlex>
+  <ion-item lines="full">
+      <ion-label position="floating">Expiry</ion-label>
+      <ion-input type="tel" #expiration (focus)="ngxPaymentCard.flip(true)"></ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input #name></ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+      <ion-label position="floating">Card Number</ion-label>
+      <ion-input #cNumber type="number" (focus)="ngxPaymentCard.flip(false)"></ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+      <ion-label position="floating">Security Code</ion-label>
+      <ion-input #sc type="number" (focus)="ngxPaymentCard.flip(false)"></ion-input>
+  </ion-item>
+  <ion-row>
+
+      <ion-col size="12">
+          <ion-button>
+            <ion-icon name="add-outline"></ion-icon>
+                      &nbsp; Add Card
+          </ion-button>
+      </ion-col>
+  </ion-row>    
+</div>
+</ion-grid>
+</ion-content>

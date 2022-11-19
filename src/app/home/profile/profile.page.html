@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-item lines="none">
+      <ion-avatar slot="end" (click)="toggleMenu()">
+        <img src="assets/icons/4.png" />
+      </ion-avatar>
+    </ion-item>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row class="ion-text-center ion-justify-content-center">
+                      <img src="../../../assets/icons/profile.png" class="avatar" alt="account avatar" />
+              </ion-row>
+
+              <ion-row class="ion-no-margin ion-text-center ion-justify-content-center">
+                  <ion-col size="12">
+                      <h5>Jesicca Andrew</h5>
+                      <h6>3 current cards</h6>
+                  </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-text-center">
+                  <ion-col size="12">
+                      <ion-button color="primary" [routerLink]="['/tab-nav/link-banks']">
+                        <ion-icon name="add-outline"></ion-icon>Link Bank Cards
+                      </ion-button>
+                  </ion-col>
+              </ion-row>
+
+              <div class="ion-margin-top">
+                          <ion-row  class="animate__animated animate__fadeInLeft animate__faster">
+                              <ion-col size="12">
+                                  <ion-item lines="none">
+                                      <div class="smallCard" style="backgroundColor: yellow"></div>
+
+                                      <ion-label>
+                                          <h4>Current Account</h4>
+                                      </ion-label>
+
+                                      <ion-label class="ion-text-right">
+                                          <h4>&pound;3500</h4>
+                                      </ion-label>
+                                  </ion-item>
+                              </ion-col>
+                              <ion-col size="12">
+                                <ion-item lines="none">
+                                    <div class="smallCard" style="backgroundColor: blue"></div>
+
+                                    <ion-label>
+                                        <h4>Savings</h4>
+                                    </ion-label>
+
+                                    <ion-label class="ion-text-right">
+                                        <h4>&pound;3000</h4>
+                                    </ion-label>
+                                </ion-item>
+                            </ion-col>
+                          </ion-row>
+              </div>
+  </ion-grid>
+</ion-content>
