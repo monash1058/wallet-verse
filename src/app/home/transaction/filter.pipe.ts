@@ -5,39 +5,30 @@ import * as _ from 'lodash';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-
-  transform(items: any[], searchText: string, filterGroup: any): any[] {
-    if (!items) { return []; }
-    if (!searchText) { return items; }
-    return _.filter(items, it => this.filterByOr(it, filterGroup, searchText));
-  }
-
-  filterByOr(item: any, filterGroup: any, searchText: string) {
-    let flag = false;
-    for (let key of filterGroup) {
-      console.log(key, typeof item[key]);
-      switch (typeof item[key]) {
-        case 'string': flag = this.filterByString(item, key, searchText);
-          break;
-        case 'number': flag = this.filterByNumber(item, key, searchText);
-          break;
-
-      }
-      if (flag) { break; }
+  transform(items: any, filter: any, defaultFilter: boolean): any {
+    if (!filter){
+      return items;
     }
-    return flag;
-  }
 
-  filterByString(item, key, searchText) {
-    searchText = searchText.toLowerCase();
-    return item[key].toLowerCase().includes(searchText);
-  }
+    if (!Array.isArray(items)){
+      return items;
+    }
 
-  filterByNumber(item, key, searchText) {
-    return item[key] === Number.parseFloat(searchText);
-  }
+    if (filter && Array.isArray(items)) {
+      let filterKeys = Object.keys(filter);
 
-  filterByBoolean(item, key, searchText) {
-    return item[key] === (/true/i).test(searchText);
+      if (defaultFilter) {
+        return items.filter(item =>
+            filterKeys.reduce((x, keyName) =>
+                (x && new RegExp(filter[keyName], 'gi').test(item[keyName])) || filter[keyName] == "", true));
+      }
+      else {
+        return items.filter(item => {
+          return filterKeys.some((keyName) => {
+            return new RegExp(filter[keyName], 'gi').test(item[keyName]) || filter[keyName] == "";
+          });
+        });
+      }
+    }
   }
 }

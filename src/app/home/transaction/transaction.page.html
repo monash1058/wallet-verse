@@ -13,7 +13,7 @@
     <ion-list-header>
       <ion-label>TRANSACTIONS HISTORY</ion-label>
     </ion-list-header>
-    <ion-item lines="none" *ngFor="let item of data | filter:search:filterKeys">
+    <ion-item lines="none" *ngFor="let item of data | filter: {vendor: search, amount:search}; let i=index;">
       <ion-icon slot="start" name="cash" color="primary"></ion-icon>
       <ion-label size="large" class="ion-text-wrap">
         <b>{{item.vendor}}</b>
