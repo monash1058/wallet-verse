@@ -10,3 +10,14 @@ ion-icon {
     font-size: 81px;
     margin-top: 20px;
 }
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

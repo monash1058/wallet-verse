@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionPage implements OnInit {
   data: any[];
+  search: string;
   filterKeys = ['vendor', 'amount'];
   constructor() { }
 

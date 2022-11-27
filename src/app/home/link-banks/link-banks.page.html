@@ -11,33 +11,33 @@
   <ion-row class="animate__animated animate__fadeInTopLeft animate__faster ion-justify-content-center ion-text-center">
     <ion-col size="12" class="ion-justify-content-center ion-text-center">
       <ngx-payment-card #ngxPaymentCard
-      [IBAN]="cNumber?.value"
-      [securityCode]="sc?.value"
-      [name]="name?.value"
-      [expirationDate]="expiration?.value">
+      [IBAN]="iban"
+      [cardNumber]="cNumber"
+      [securityCode]="sc"
+      [name]="name">>
 </ngx-payment-card>
     </ion-col>
 </ion-row>
 
 <div fxLayout="column" fxFlex>
   <ion-item lines="full">
-      <ion-label position="floating">Expiry</ion-label>
-      <ion-input type="tel" #expiration (focus)="ngxPaymentCard.flip(true)"></ion-input>
+      <ion-label position="floating">IBAN</ion-label>
+      <ion-input [(ngModel)]="iban"></ion-input>
   </ion-item>
 
   <ion-item lines="full">
       <ion-label position="floating">Name</ion-label>
-      <ion-input #name></ion-input>
+      <ion-input [(ngModel)]="name"></ion-input>
   </ion-item>
 
   <ion-item lines="full">
       <ion-label position="floating">Card Number</ion-label>
-      <ion-input #cNumber type="number" (focus)="ngxPaymentCard.flip(false)"></ion-input>
+      <ion-input [(ngModel)]="cNumber" type="number"></ion-input>
   </ion-item>
 
   <ion-item lines="full">
       <ion-label position="floating">Security Code</ion-label>
-      <ion-input #sc type="number" (focus)="ngxPaymentCard.flip(false)"></ion-input>
+      <ion-input [(ngModel)]="sc" type="number"></ion-input>
   </ion-item>
   <ion-row>
 
