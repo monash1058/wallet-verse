@@ -15,19 +15,28 @@
               <ion-row class="ion-no-margin ion-text-center ion-justify-content-center">
                   <ion-col size="12">
                       <h5>Jesicca Andrew</h5>
-                      <h6>3 current cards</h6>
+                      <div class="amount-box text-center">
+                        <p>Total Balance</p>
+                        <p class="amount">$ 123</p>
+                    </div>
+            
+                    <div class="btn-group text-center">
+                        <ion-button type="button" class="btn btn-outline-light" [routerLink]="['/tab-nav/transfer/pay-bank']">Add Money</ion-button>
+                        <ion-button type="button" class="btn btn-outline-light">Widthdraw</ion-button>
+                        </div>
+                      <!-- <h6>3 current cards</h6> -->
                   </ion-col>
               </ion-row>
 
-              <ion-row class="ion-text-center">
+              <!-- <ion-row class="ion-text-center">
                   <ion-col size="12">
-                      <ion-button color="primary" [routerLink]="['/tab-nav/link-banks']">
-                        <ion-icon name="add-outline"></ion-icon>Link Bank Cards
+                      <ion-button color="primary">
+                        <ion-icon name="add-outline"></ion-icon>Deposit to wallet
                       </ion-button>
                   </ion-col>
-              </ion-row>
+              </ion-row> -->
 
-              <div class="ion-margin-top">
+              <!-- <div class="ion-margin-top">
                           <ion-row  class="animate__animated animate__fadeInLeft animate__faster">
                               <ion-col size="12">
                                   <ion-item lines="none">
@@ -56,6 +65,6 @@
                                 </ion-item>
                             </ion-col>
                           </ion-row>
-              </div>
+              </div> -->
   </ion-grid>
 </ion-content>
