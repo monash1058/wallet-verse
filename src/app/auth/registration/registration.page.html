@@ -1,69 +1,127 @@
 <ion-header>
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Register</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
-<ion-content>
+
+<ion-content class="background">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center" style="padding-top: 20px;">
-        <div class="container box" style="margin-top: 10px; padding-left: 0px; padding-right: 0px;">
-          <div class="row">
-            <div class="col-12" style="text-align: center;">
-              <form class="form-signin">
-                <h2 class="form-signin-heading">Please Register</h2>
-                <ion-item>
-                  <ion-label class="sr-only" position="floating">Name</ion-label>
-                  <ion-input type="text" class="form-control" required></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="floating" class="sr-only">Phone Number</ion-label>
-                  <ion-input type="text" required class="form-control"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="floating" class="sr-only">Password</ion-label>
-                  <ion-input type="password" required class="form-control"></ion-input>
-                </ion-item>
-                <ion-row>
-                  <ion-col>
-                    <ion-button type="submit" color="danger" expand="block"  [routerLink]="['/auth/otp-verify']">Register</ion-button>
-                    <p class="secondry-text" style="text-align: center">Already have an Account? <a href="javascript:void(0);"
-                      class="small-text" routerLinkActive="active" [routerLink]="['/auth/login']">Sign in</a></p>
-                  </ion-col>
-                </ion-row>
-              </form>
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Sign Up</h3>
+          <div class="d-flex justify-content-end social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formData" (ngSubmit)="onClickSubmit(formData.value)">
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <ion-input type="text" class="form-control" formControlName="username" placeholder="User Name"></ion-input>
+              
             </div>
+            <ion-text  
+            color="danger" 
+            *ngIf="!formData.get('username').valid && formData.get('username').touched">
+            <ion-text
+              class="error" 
+              *ngIf="formData.get('username').hasError('required')">
+              * Please enter the username
+            </ion-text>
+          </ion-text>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+            </div>
+            <select class="custom-select" style="max-width: 90px;">
+                <option selected="">+65</option>
+            </select>
+              <ion-input class="form-control" formControlName="mob" (keyup)="verify($event)" placeholder="Phone Number" type="text" (keypress)="numericOnly($event);" maxLength="8"></ion-input>
+              <div class="input-group-prepend">
+                <!-- <ion-button style="margin-top: 3px;left: 364px;position: absolute;" (click)="verify()" [disabled]="formData.get('mob').invalid">Verify</ion-button> -->
+            </div> 
+            </div> 
+           
+            <!-- <ion-button type="submit" class="verify">Verify</ion-button> -->
+            <ion-text  
+            color="danger" 
+            *ngIf="!formData.get('mob').valid && formData.get('mob').touched">
+            <ion-text
+              class="error" 
+              *ngIf="formData.get('mob').hasError('required')">
+              * Please enter the Mobile Number
+            </ion-text>
+            <ion-text
+              class="error" 
+              *ngIf="!formData.get('mob').hasError('required') 
+                && formData.get('mob').hasError('pattern')">
+              * Please Enter 8 digit Mobile number
+            </ion-text>
+          </ion-text>
+          <div class="input-group form-group" *ngIf="isOtp">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <ion-input type="number" formControlName="otp" class="form-control" placeholder="Enter OTP" (keypress)="numericOnly($event);" maxLength="6"></ion-input>
+          </div>
+          <ion-text  
+          color="danger" 
+          *ngIf="!formData.get('otp').valid && formData.get('otp').touched">
+          <ion-text
+            class="error" 
+            *ngIf="formData.get('otp').hasError('required')">
+            * Please enter the OTP
+          </ion-text>
+          <ion-text
+            class="error" 
+            *ngIf="!formData.get('otp').hasError('required') 
+              && formData.get('otp').hasError('maxLength')">
+            * Please Enter 6 digit number OTP
+          </ion-text>
+        </ion-text>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <ion-input type="password" formControlName="password" class="form-control" placeholder="password"></ion-input>
+            </div>
+            <ion-text 
+            color="danger" 
+            *ngIf="!formData.get('password').valid && formData.get('password').touched">
+            <ion-text
+              class="error"  
+              *ngIf="formData.get('password').hasError('required')">
+              * Please enter the password
+            </ion-text>
+            <ion-text
+              class="error"  
+              *ngIf="!formData.get('password').hasError('required') && formData.get('password').hasError('pattern')">
+              * Password must contain more than 8 characters, 1 upper case letter, and 1 special character
+            </ion-text>
+          </ion-text>
+          <div class="row align-items-center remember">
+            <input type="checkbox">Agree Terms & Conditions
+          </div>
+            <div class="form-group">
+              <ion-button type="submit" class="float-right" [disabled]="formData.invalid">Sign Up</ion-button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Already have an account?<a [routerLink]="['/auth/login']">Sign In</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- <form>
-    <ion-item lines="full">
-      <ion-label position="floating">First name</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Last name</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Register</ion-button>
-        <p class="secondry-text" style="text-align: center">Already have an Account? <a href="javascript:void(0);"
-          class="small-text" routerLinkActive="active" [routerLink]="['/login']">Sign in</a></p>
-      </ion-col>
-    </ion-row>
-  </form> -->
 </ion-content>
+

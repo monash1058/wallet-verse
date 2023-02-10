@@ -1,1 +1,48 @@
-<ion-router-outlet></ion-router-outlet>
+<ion-header>
+    <ion-toolbar color="white">
+      <ion-searchbar
+        [animated]="true"
+        debounce="800"
+        #searchInput
+        placeholder="Search by name or number..."
+        [(ngModel)]="search"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <ng-container>
+      <ion-list lines="none">
+        <ion-item *ngFor="let user of getsData | filter: search; let i=index;" class="ion-margin-top" (click)="selectUser(user)">
+          <ion-thumbnail slot="start">
+            <img src="../../../assets/images/man.png"/>
+          </ion-thumbnail>
+          <ion-label>
+            <ion-text>{{ user?.name }}</ion-text>
+            <p>
+              <ion-text>
+                {{user?.phone}}
+              </ion-text>
+            </p>
+            <!-- <p>
+              <ion-text>
+                {{store?.location}}
+              </ion-text>
+            </p> -->
+            <!-- <p>
+              <ion-text>
+                <ion-icon name="time"></ion-icon> {{store?.delivery_time}} MINS
+              </ion-text>
+            </p> -->
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <!-- <ng-container *ngIf="usersData?.length == 0">
+        <div style="text-align:center">
+            <br /><br />
+            <b>No search results , please try again</b>
+        </div>
+      </ng-container> -->
+  
+  </ion-content>

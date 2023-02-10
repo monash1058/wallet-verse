@@ -1,70 +1,55 @@
 <ion-header>
-    <ion-item lines="none">
+    <!-- <ion-item lines="none">
       <ion-avatar slot="end" (click)="toggleMenu()">
         <img src="assets/icons/4.png" />
       </ion-avatar>
-    </ion-item>
+    </ion-item> -->
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-grid>
-    <ion-row class="ion-text-center ion-justify-content-center">
-                      <img src="../../../assets/icons/profile.png" class="avatar" alt="account avatar" />
-              </ion-row>
-
-              <ion-row class="ion-no-margin ion-text-center ion-justify-content-center">
-                  <ion-col size="12">
-                      <h5>Jesicca Andrew</h5>
-                      <div class="amount-box text-center">
-                        <p>Total Balance</p>
-                        <p class="amount">$ 123</p>
-                    </div>
-            
-                    <div class="btn-group text-center">
-                        <ion-button type="button" class="btn btn-outline-light" [routerLink]="['/tab-nav/transfer/pay-bank']">Add Money</ion-button>
-                        <ion-button type="button" class="btn btn-outline-light">Widthdraw</ion-button>
-                        </div>
-                      <!-- <h6>3 current cards</h6> -->
-                  </ion-col>
-              </ion-row>
-
-              <!-- <ion-row class="ion-text-center">
-                  <ion-col size="12">
-                      <ion-button color="primary">
-                        <ion-icon name="add-outline"></ion-icon>Deposit to wallet
-                      </ion-button>
-                  </ion-col>
-              </ion-row> -->
-
-              <!-- <div class="ion-margin-top">
-                          <ion-row  class="animate__animated animate__fadeInLeft animate__faster">
-                              <ion-col size="12">
-                                  <ion-item lines="none">
-                                      <div class="smallCard" style="backgroundColor: yellow"></div>
-
-                                      <ion-label>
-                                          <h4>Current Account</h4>
-                                      </ion-label>
-
-                                      <ion-label class="ion-text-right">
-                                          <h4>&pound;3500</h4>
-                                      </ion-label>
-                                  </ion-item>
-                              </ion-col>
-                              <ion-col size="12">
-                                <ion-item lines="none">
-                                    <div class="smallCard" style="backgroundColor: blue"></div>
-
-                                    <ion-label>
-                                        <h4>Savings</h4>
-                                    </ion-label>
-
-                                    <ion-label class="ion-text-right">
-                                        <h4>&pound;3000</h4>
-                                    </ion-label>
-                                </ion-item>
-                            </ion-col>
-                          </ion-row>
-              </div> -->
-  </ion-grid>
+  <div class="container">
+    <div class="d-flex justify-content-center h-100">
+      <form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
+      <div class="card">
+        <div class="card-header">
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
+            </div>
+            <div class="avatar-preview">
+              <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-lg btn-block" (click)="fileInput.click()">Upload Image</button>
+        </div>
+        <div class="text-center">
+            <h4>Zenda Grace</h4>
+            <span>$4000</span>
+        </div>
+        
+        <h4>Edit Profile</h4>
+        <div class="card-body">
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <ion-input type="text" class="form-control" placeholder="username" formControlName="name"></ion-input>
+              
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <ion-input type="password" class="form-control" placeholder="password" formControlName="password"></ion-input>
+            </div>
+            <div class="form-group">
+              <ion-button type="submit" [disabled]="formData.invalid">Update</ion-button>
+            </div>
+        
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
 </ion-content>

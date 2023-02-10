@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { take } from 'rxjs/operators';
+import { TransferModalComponent } from 'src/app/shared/components/transfer-modal/transfer-modal.component';
+import { ToastrCustomService } from 'src/app/shared/service/toastr.service';
+import { HomeService } from '../home.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,11 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage {
+  usersData: any;
   features: any[] = [
     {id: 1, name: 'Account', src: 'assets/icons/top-up.png', background: 'rgba(27,150,181, 0.1)', page: ''},
     {id: 2, name: 'Transfer to', src: 'assets/icons/cash-withdrawal.png', background: 'rgba(106,100,255, 0.1)', page: ''},
     {id: 3, name: 'Transactions', src: 'assets/icons/send.png', background: 'rgba(255, 196, 9, 0.1)', page: ''},
-    {id: 4, name: 'Wallet', src: 'assets/icons/debit-card.png', background: 'rgba(27,150,181, 0.1)', page: ''},
+    {id: 4, name: 'Top-up', src: 'assets/icons/debit-card.png', background: 'rgba(27,150,181, 0.1)', page: ''},
   ];
 
   transactions: any[] = [
@@ -19,21 +25,50 @@ export class DashboardPage {
     {id: 2, vendor: 'Debited from Proinfocus', image: '', amount: -1200, time: '4:00PM'}
   ];
 
-  constructor(private router : Router) {}
-  toggleMenu() {
-    alert('Logout Successfully');
-    this.router.navigate(['/auth/login']); 
+  constructor(private router : Router, private toastr: ToastrCustomService, private modalCtrl: ModalController,private homeService: HomeService) {}
+
+  ionViewWillEnter() {
+    this.getDashboardData();
+  }
+  getDashboardData(){
+    this.usersData = [];
+    const path = 'api/user/getUser';
+    let datas = {
+      '_id':localStorage.getItem('_id')
+    }
+    this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.usersData = res.data;
+    });
+  }
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
+    this.toastr.success('User Sucessfully Logged Out');
   }
   navigate(item:any){
     if(item.id == 1){
-      this.router.navigate(['/tab-nav/profile']); 
+      this.router.navigate(['/admin/tab-nav/profile']); 
     } else if(item.id == 2){
-      this.router.navigate(['/tab-nav/transfer']); 
+      this.router.navigate(['/admin/tab-nav/transfer']); 
     }else if(item.id == 3){
-      this.router.navigate(['/tab-nav/transaction']); 
+      this.router.navigate(['/admin/tab-nav/transaction-history']); 
     } else {
-      this.router.navigate(['/tab-nav/wallet']); 
+      this.openModal(); 
     }
 
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: TransferModalComponent,
+      componentProps: {
+        users: this.usersData,
+        value: false
+      },
+    });
+   modal.present();
+   modal.onDidDismiss().then((data) => {
+    this.getDashboardData()
+  });
   }
 }

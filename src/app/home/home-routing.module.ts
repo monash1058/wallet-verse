@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('./transfer/transfer.module').then(m => m.TransferPageModule)
       },
       {
-        path: 'wallet',
-        loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletPageModule)
+        path: 'transaction-history',
+        loadChildren: () => import('./history/wallet.module').then(m => m.WalletPageModule)
       },
       {
         path: 'profile',
@@ -27,15 +27,11 @@ const routes: Routes = [
         path: 'link-banks',
         loadChildren: () => import('./link-banks/link-banks.module').then( m => m.LinkBanksPageModule)
       },
-      {
-        path: 'transaction',
-        loadChildren: () => import('./transaction/transaction.module').then( m => m.TransactionPageModule)
-      },
     ]
   },
   {
     path: '',
-    redirectTo: '/tab-nav/dashboard'
+    redirectTo: '/admin/tab-nav/dashboard'
   },
 
 ];

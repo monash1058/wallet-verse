@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../services/Authentication.service';
+import { take } from 'rxjs/operators';
+import { ToastrCustomService } from 'src/app/shared/service/toastr.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +11,47 @@ import { AuthenticationService } from '../../services/Authentication.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  userName: string;
-  password: string;
+  userName: any;
+  password: any;
   formData: FormGroup;
-
-  constructor(private authService : AuthenticationService, private router : Router,private fb: FormBuilder,) { }
+  type = true;
+  constructor( private authService: AuthService, private toastr: ToastrCustomService, private router : Router,private fb: FormBuilder) { }
 
   ngOnInit() {
    this.formData = this.fb.group({
-      userName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
+      mob: ['', [Validators.required, Validators.pattern("^((\\+65-?)|0)?[0-9]{8}$")]],
+      password: ['', [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$#!_%*?&])[A-Za-z\d$@$!%*?&].{7,30}")]]
    });
   }
-
+  changeType() {
+    this.type = !this.type;
+  }
   onClickSubmit(data: any) {
-     this.userName = data.userName;
-     this.password = data.password;
-     window.onpopstate = function (e) { window.history.forward(); }
-     this.authService.login(this.userName, this.password)
-        .subscribe( data => { 
-           console.log("Is Login Success: " + data); 
-          if(data){
-            this.router.navigate(['../../../tab-nav/dashboard']); 
-          } else {
-            alert('UserName and Password is Incorrect');
-          }
-     });
+    if(!this.formData.valid) {
+      this.formData.markAllAsTouched();
+      return;
+    }
+    const path = "api/user/login";
+    let datas = {
+      'phone': this.formData.value.mob,
+      'password':  this.formData.value.password
+    }
+    this.authService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      if(res.success){
+        localStorage.setItem('_id', res.data._id);
+        localStorage.setItem('success', res.success);
+        this.toastr.success("Login Successfully");
+        this.router.navigate(['../../../admin/tab-nav/dashboard']);
+      } else {
+        this.toastr.error(res.message);
+      }   
+    });
+  }
+  numericOnly(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 }

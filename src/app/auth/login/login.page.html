@@ -1,40 +1,78 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
+  <!-- <ion-toolbar>
+    <ion-title style="text-align: center">Talky-Wallet</ion-title>
+  </ion-toolbar> -->
 </ion-header>
 
-<ion-content>
-
+<ion-content class="background">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center" style="padding-top: 20px;">
-        <div class="container box" style="margin-top: 10px; padding-left: 0px; padding-right: 0px;">
-          <div class="row">
-            <div class="col-12" style="text-align: center;">
-              <form [formGroup]="formData" (ngSubmit)="onClickSubmit(formData.value)" class="form-signin">
-                <h2 class="form-signin-heading">Please Log in</h2>
-                <ion-item>
-                  <ion-label for="inputEmail" class="sr-only" position="floating">User Name</ion-label>
-                  <ion-input type="text" id="username" class="form-control" formControlName="userName"
-                    placeholder="Username" required autofocus></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label for="inputPassword" class="sr-only" position="floating">Password</ion-label>
-                  <ion-input type="password" id="inputPassword" class="form-control" formControlName="password"
-                    placeholder="Password" required></ion-input>
-                </ion-item>
-                <ion-row>
-                  <ion-col>
-                    <ion-button type="submit" color="danger" expand="block">Sign In</ion-button>
-                  </ion-col>
-                  <ion-col>
-                    <ion-button [routerLink]="['/auth/registration']" color="danger" expand="block">Register</ion-button>
-                  </ion-col>
-                </ion-row>
-                <a [routerLink]="['/auth/forgot-password']" class="small-text">Forgot Password?</a>
-              </form>
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Sign In</h3>
+          <!-- <div class="d-flex justify-content-end social_icon">
+            <span><i class="fab fa-facebook-square"></i></span>
+            <span><i class="fab fa-google-plus-square"></i></span>
+            <span><i class="fab fa-twitter-square"></i></span>
+          </div> -->
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formData" (ngSubmit)="onClickSubmit(formData.value)">
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
+              </div>
+              <ion-input type="text" class="form-control" placeholder="Mobile Number" formControlName="mob" (keypress)="numericOnly($event);" maxLength="8"></ion-input>
             </div>
+            <ion-text  
+            color="danger" 
+            *ngIf="!formData.get('mob').valid && formData.get('mob').touched">
+            <ion-text
+              class="error" 
+              *ngIf="formData.get('mob').hasError('required')">
+              * Please enter the Mobile Number
+            </ion-text>
+            <ion-text
+              class="error" 
+              *ngIf="!formData.get('mob').hasError('required') 
+                && formData.get('mob').hasError('pattern')">
+              * Please Enter 8 digit Mobile number
+            </ion-text>
+          </ion-text>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <ion-input class="form-control" placeholder="password" formControlName="password" type="password"></ion-input>
+            </div>
+            <ion-text 
+            color="danger" 
+            *ngIf="!formData.get('password').valid && formData.get('password').touched">
+            <ion-text
+              class="error"  
+              *ngIf="formData.get('password').hasError('required')">
+              * Please enter your password
+            </ion-text>
+            <ion-text
+              class="error"  
+              *ngIf="!formData.get('password').hasError('required') && formData.get('password').hasError('pattern')">
+              * Password must contain more than 8 characters, 1 upper case letter, and 1 special character
+            </ion-text>
+          </ion-text>
+            <div class="row align-items-center remember">
+              <input type="checkbox">Remember Me
+            </div>
+            <div class="form-group">
+              <ion-button type="submit" class="float-right" [disabled]="formData.invalid">Login</ion-button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Don't have an account?<a [routerLink]="['/auth/registration']">Sign Up</a>
+          </div>
+          <div class="d-flex justify-content-center">
+            <a [routerLink]="['/auth/forgot-password']">Forgot your password?</a>
           </div>
         </div>
       </div>

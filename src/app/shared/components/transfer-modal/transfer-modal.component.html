@@ -1,0 +1,42 @@
+<ion-header>
+	<ion-toolbar>
+    <ion-buttons fill="outline" slot="end">
+			<ion-button (click)="dismiss()">
+				Cancel
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex flex-row justify-content-center mb-1">
+          <div class="image"> <img  src="../../../../assets/images/man.png" class="rounded-circle"></div>
+      </div>
+        <h3 style="text-align: center;">Hello!...{{data.name}}</h3>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-dollar"></i></span>
+            </div>
+            <ion-input type="number" class="form-control" placeholder="Amount" #amount (keypress)="numericOnly($event);" required></ion-input>
+          </div>
+            <ion-item>
+              <ion-textarea placeholder="Message to your Friend" [autoGrow]="true" [maxlength]="25"
+                value="" #message>
+              </ion-textarea>
+            </ion-item>
+          <!-- </div> -->
+          <div class="form-group">
+            <ion-button type="submit" class="float-right" (click)="onClickSubmit(amount, message)" *ngIf="isTransfer">Transfer Money</ion-button>
+            <ion-button type="submit" class="float-right" (click)="onClickSubmit(amount, message)" *ngIf="!isTransfer">Add Money</ion-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>
