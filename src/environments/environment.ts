@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendApi: "http://localhost:9000/",
+  backendApi: "https://embarrassed-wasp-sandals.cyclic.app/",
 };
 
 /*
