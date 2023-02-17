@@ -31,10 +31,11 @@ export class ProfilePage implements OnInit {
   ionViewWillEnter() {
     this.getDashboardData();
   }
+
   uploadFile(event) {
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
-    this.imgFile = event.target.files[0].name;
+    this.imgFile = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
 
@@ -65,14 +66,10 @@ export class ProfilePage implements OnInit {
     this.homeService.postMethod(path, formData).pipe(take(1)).subscribe((res: any) => {
       this.toastr.success(res.message);
       setTimeout(function(){
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['../auth/login']);
         localStorage.clear();
       },5000);
     });
-  }
-  toggleMenu() {
-    alert('Logout Successfully');
-    this.router.navigate(['/auth/login']); 
   }
   logout() {
     localStorage.clear();
@@ -88,6 +85,8 @@ export class ProfilePage implements OnInit {
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       this.check = false;
       this.usersData = res.data;
+      this.formData.patchValue({name: res.data.name});
+      this.imageUrl = res.data.profileImage
     });
   }
   checkBalance(){

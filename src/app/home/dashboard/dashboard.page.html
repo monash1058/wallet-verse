@@ -5,8 +5,9 @@
 <ion-content [fullscreen]="true" color="light">
   <ion-item lines="none">
     <ion-text slot="start" style="font-weight: bold;">Welcome, {{usersData?.name}}</ion-text>
+    <img src="../../../assets/images/wave.png" style="width: 20px;height: 20px;margin-left: initial;"/>
     <ion-avatar slot="end" style="cursor: pointer;" [routerLink]="['/admin/tab-nav/profile']">
-      <img src="../../../assets/images/man.png" />
+      <img [src]="usersData?.profileImage">
     </ion-avatar>
   </ion-item>
   <div class="main-header"></div>
@@ -69,15 +70,32 @@
       <ion-list-header>
         <ion-label>RECENT TRANSACTIONS</ion-label>
       </ion-list-header>
-      <ion-item lines="none" *ngFor="let item of transactions">
+      <ion-list-header>
+        <ion-label style="font-size: 20px;">CREDITED</ion-label>
+      </ion-list-header>
+      <ion-item lines="none" *ngFor="let transaction of reciveHistoryData">
         <ion-icon slot="start" name="cash" color="primary"></ion-icon>
         <ion-label size="large" class="ion-text-wrap">
-          <b>{{item.vendor}}</b>
+          <b>{{transaction?.sendBy}}</b>
           <p>
-            {{item?.time}}
+            {{transaction?.createdAt | date :'short'}}
           </p>
         </ion-label>
-        <ion-text slot="end" [color]="item?.amount > 0 ? 'success' : 'danger'">₹{{item?.amount}}</ion-text>
+        <ion-text slot="end" color="success">{{'$' + transaction?.amount}}</ion-text>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label style="font-size: 20px;">DEBITED</ion-label>
+      </ion-list-header>
+      <ion-item lines="none" *ngFor="let transaction of sendHistoryData">
+        <ion-icon slot="start" name="cash" color="primary"></ion-icon>
+        <ion-label size="large" class="ion-text-wrap">
+          <b>{{transaction?.reciveBy}} </b>
+          <p>
+            {{transaction?.createdAt | date :'short'}}
+          </p>
+        </ion-label>
+        <ion-text slot="end" color="danger">{{'-$' + transaction?.amount}}</ion-text>
       </ion-item>
     </ion-list>
   </ion-grid>
