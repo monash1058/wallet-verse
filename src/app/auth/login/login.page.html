@@ -6,7 +6,12 @@
 
 <ion-content class="background">
   <div class="container">
-    <div class="d-flex justify-content-center h-100">
+    <div id="login_title">
+      <img class="logo" src="../../../assets/images/logo.png"/>
+      <h2 class="text">PRO-PAY</h2>
+      <div class="under_login"></div>
+  </div>
+    <div class="d-flex justify-content-center">
       <div class="card">
         <div class="card-header">
           <h3>Sign In</h3>
@@ -20,7 +25,7 @@
           <form [formGroup]="formData" (ngSubmit)="onClickSubmit(formData.value)">
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
+                <span class="input-group-text"><ion-icon name="call-sharp"></ion-icon></span>
               </div>
               <ion-input type="text" class="form-control" placeholder="Mobile Number" formControlName="mob" (keypress)="numericOnly($event);" maxLength="8"></ion-input>
             </div>
@@ -43,7 +48,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key"></i></span>
               </div>
-              <ion-input class="form-control" placeholder="password" formControlName="password" type="password"></ion-input>
+              <ion-input class="form-control" placeholder="Password" formControlName="password" type="password"></ion-input>
             </div>
             <ion-text 
             color="danger" 

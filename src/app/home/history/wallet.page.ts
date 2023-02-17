@@ -12,6 +12,9 @@ export class WalletPage implements OnInit {
   usersData: any;
   sendHistoryData: any[] = [];
   reciveHistoryData: any[] = [];
+  check = false;
+  segment: string = 'primary';
+
   constructor( private homeService: HomeService) { }
 
   ngOnInit() {
@@ -28,6 +31,7 @@ export class WalletPage implements OnInit {
       '_id':localStorage.getItem('_id')
     }
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.check = false;
       this.usersData = res.data;
     });
   }
@@ -54,5 +58,16 @@ export class WalletPage implements OnInit {
     this.checked = event;
     console.log(this.checked);
     // this.filterTransactions();
+  }
+  checkBalance(){
+    this.usersData = [];
+    const path = 'api/user/getUser';
+    let datas = {
+      '_id':localStorage.getItem('_id')
+    }
+    this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.check = true;
+      this.usersData = res.data;
+    });
   }
 }

@@ -13,6 +13,7 @@ import { HomeService } from '../home.service';
 })
 export class DashboardPage {
   usersData: any;
+  check = false;
   features: any[] = [
     {id: 1, name: 'Account', src: 'assets/icons/top-up.png', background: 'rgba(27,150,181, 0.1)', page: ''},
     {id: 2, name: 'Transfer to', src: 'assets/icons/cash-withdrawal.png', background: 'rgba(106,100,255, 0.1)', page: ''},
@@ -37,13 +38,9 @@ export class DashboardPage {
       '_id':localStorage.getItem('_id')
     }
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.check = false;
       this.usersData = res.data;
     });
-  }
-  logout() {
-    localStorage.clear();
-    this.router.navigate(['/auth/login']);
-    this.toastr.success('User Sucessfully Logged Out');
   }
   navigate(item:any){
     if(item.id == 1){
@@ -70,5 +67,16 @@ export class DashboardPage {
    modal.onDidDismiss().then((data) => {
     this.getDashboardData()
   });
+  }
+  checkBalance(){
+    this.usersData = [];
+    const path = 'api/user/getUser';
+    let datas = {
+      '_id':localStorage.getItem('_id')
+    }
+    this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.check = true;
+      this.usersData = res.data;
+    });
   }
 }

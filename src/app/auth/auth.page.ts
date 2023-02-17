@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FcmService } from '../shared/service/fcm.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPage implements OnInit {
 
-  constructor() { }
+  constructor(private fcmService: FcmService) {
+    // this.fcmService.initPush(); 
+  }
 
   ngOnInit() {
   }

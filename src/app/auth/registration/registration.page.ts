@@ -32,13 +32,12 @@ export class RegistrationPage implements OnInit {
 
   verify(event){
     if(event.target.value.length == 8){
-    const path = `api/user/verifyNumber/${this.formData.value.mob}`;
+    const path = `api/user/verifyNumber/${event.target.value}`;
     this.authService.getMethod(path).pipe(take(1)).subscribe((res: any) => {
     this.toastr.success("OTP sent successfully");
      this.isOtp = true;
     });
     }
-   
   }
   onClickSubmit(data: any) {
     if(!this.formData.valid) {
@@ -56,8 +55,10 @@ export class RegistrationPage implements OnInit {
      this.authService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       localStorage.setItem('_id', res.data._id);
       localStorage.setItem('success', res.success);
+      localStorage.setItem('amount', res.data.amount);
       this.toastr.success("Registered Successfully");
        this.router.navigate(['../../../admin/tab-nav/dashboard']);
+       this.formData.reset();
      });
   }
 

@@ -15,8 +15,10 @@ export class ProfilePage implements OnInit {
   @ViewChild('fileInput') el: ElementRef;
   formData: FormGroup;
   logo: any;
-  imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+  imageUrl: any = '../../../assets/images/man.png';
   imgFile:any;
+  usersData: any;
+  check = false;
   constructor(private homeService: HomeService,private cd: ChangeDetectorRef, private toastr: ToastrCustomService, private router : Router,private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -26,7 +28,9 @@ export class ProfilePage implements OnInit {
       file: [null],
    });
   }
-
+  ionViewWillEnter() {
+    this.getDashboardData();
+  }
   uploadFile(event) {
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
@@ -69,5 +73,32 @@ export class ProfilePage implements OnInit {
   toggleMenu() {
     alert('Logout Successfully');
     this.router.navigate(['/auth/login']); 
+  }
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
+    this.toastr.success('User Sucessfully Logged Out');
+  }
+  getDashboardData(){
+    this.usersData = [];
+    const path = 'api/user/getUser';
+    let datas = {
+      '_id':localStorage.getItem('_id')
+    }
+    this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.check = false;
+      this.usersData = res.data;
+    });
+  }
+  checkBalance(){
+    this.usersData = [];
+    const path = 'api/user/getUser';
+    let datas = {
+      '_id':localStorage.getItem('_id')
+    }
+    this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+      this.check = true;
+      this.usersData = res.data;
+    });
   }
 }

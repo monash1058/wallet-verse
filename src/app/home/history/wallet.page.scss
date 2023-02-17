@@ -1,78 +1,4 @@
-/* iOS places the subtitle above the title */
-ion-card-header.ios {
-    display: flex;
-    flex-flow: column-reverse;
-  }
-p {
-    font-size: 25px;
-}
-ion-icon {
-    font-size: 81px;
-    margin-top: 20px;
-}
-.column {
-    float: left;
-    width: 33.33%;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-
-  body {
-    // background-color: #3fb0ef !important;
-    
-  }
-  
-  .wallet-container {
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    font-size: 15px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    
-    
-  }
-  
- .header {
-  // background: #21223f;
-  border-top-left-radius: 0rem;
-  border-top-right-radius: 0rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
-
-.filter {
-  display: flex;
-  padding: 0.5rem;
-  min-width: 80px;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #828393;
-  border-radius: 10px;
-}
-
-.calendar i,
-.select i,
-.total .label {
-  color: #828393;
-}
-
-.content {
-  // background: #21223f;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  display: grid;
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
 
 .total {
   align-self: start;
@@ -105,179 +31,148 @@ ion-icon {
   color: #02ca8c;
 }
 
-.cards {
-  display: grid;
-  overflow-x: auto;
-  overflow-y: hidden;
-  grid-template-columns: repeat(auto-fill, minmax(auto, 0));
-  grid-gap: 10px;
-  align-self: start;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.card {
-  min-width: 160px;
-  height: 100px;
-  padding: 1rem;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+ion-content{
+  --background: url('../../../assets/images/temp.webp') no-repeat 100% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}
+.wrapper {
+    margin: 10px auto;
+    padding: 10px 30px
 }
 
-.green {
-  background: #00cccc;
+
+.text {
+    color: #fff
 }
 
-.magenta {
-  background: #7359ff;
+.money {
+    font-family: 'Lato', sans-serif
 }
 
-.gray {
-  background: #7a7faf;
+.fa-long-arrow-down,
+.fa-long-arrow-up {
+    padding-left: 12px;
+    padding-top: 8px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: 100;
+    color: #28df99
 }
 
-.card .balance {
-  display: flex;
-  align-self: start;
-  padding: 0.5rem 0;
-  width: 60px;
-  justify-content: space-around;
-  font-size: 0.8rem;
+.fa-long-arrow-up {
+    color: #ffa500
 }
 
-.card .label {
-  color: #adffff;
-  font-size: 0.7rem;
+
+// .table-dark {
+//     // background-color: #222
+// }
+ion-chip {
+  background-color: transparent;
+  ion-label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    // margin-left: 50px;
+    text-shadow: 1px 1px 1px var(--ion-color-medium);
+    color: whitesmoke;
+  }
+}
+.table thead th {
+    text-transform: uppercase;
+    color: #bbb;
+    font-size: 12px
 }
 
-.card .item {
-  align-self: start;
-  padding: 0.5rem 0;
-  height: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.table thead th,
+.table td,
+.table th {
+    border: none;
+    overflow: auto auto
 }
 
-.card .arrow-up {
-  transform: rotateZ(45deg);
+td .fa-briefcase,
+td .fa-bed,
+td .fa-exchange,
+td .fa-cutlery {
+    color: #ff6347;
+    background-color: #444;
+    padding: 5px;
+    border-radius: 50%
 }
 
-.card .item .value {
-  font-size: 1.3rem;
+td .fa-bed,
+td .fa-cutlery {
+    color: #40a8c4
 }
 
-::-webkit-scrollbar {
-  height: 5px;
-  width: 5px;
+td .fa-exchange {
+    color: #b15ac7
 }
 
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px #21233f;
+tbody tr td .fa-cc-mastercard,
+tbody tr td .fa-cc-visa {
+    color: #bbb
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #676767;
-  border-radius: 10px;
+tbody tr td.text-muted {
+    font-family: 'Lato', sans-serif
 }
 
-.menu {
-  list-style-type: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2px;
+tbody tr td .fa-long-arrow-up,
+tbody tr td .fa-long-arrow-down {
+    font-size: 12px;
+    padding-left: 7px;
+    padding-top: 3px;
+    height: 20px;
+    width: 20px
 }
 
-.menu li {
-  height: 40px;
-  position: relative;
+.results span {
+    color: #bbb;
+    font-size: 12px
 }
 
-.menu label,
-.menu input {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.7;
+.results span b {
+    font-family: 'Lato', sans-serif
+}
+// ion-chip.md.ion-activatable.hydrated {
+//   height: 50px;
+//   color: whitesmoke;
+//   background-color: #2dd36f;
+//   width: 127px;
+// }
+// ion-chip.ios.ion-activatable.hydrated{
+//   height: 50px;
+//   color: whitesmoke;
+//   background-color: #2dd36f;
+//   width: 127px;
+// }
+.animation{
+  animation: color-change 2s infinite;
+  font-size: 20px; 
+  text-align: center;
+  margin-top: 20px;
 }
 
-.menu input[type="radio"] {
-  opacity: 0.011;
-  z-index: 100;
+@keyframes color-change {
+  0% { color: #2dd36f; }
+  50% { color: #ffa500; }
+  100% { color: #eb445a; }
 }
-
-.menu input[type="radio"]:checked + label {
-  border-bottom: 1px solid #2181ff;
-  opacity: 1;
-}
-
-.menu input[type="radio"]:checked + label i {
-  color: #2181ff;
-}
-
-.menu label {
-  cursor: pointer;
-  z-index: 90;
-  font-size: 0.7rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.menu label:hover {
-  opacity: 0.7;
-}
-
-.list {
-  background-color: #211c3a;
-
-}
-
-.list [class^="item"] {
-  display: flex;
-  justify-content: space-between;
-  background-color: #21223f;
-  padding: 10px 12px;
-}
-
-.list div[class^="section"] {
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-}
-
-.list .icon {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.list .icon.up {
-  color: #00ff00;
-  transform: rotateZ(30deg);
-}
-
-.list .icon.down {
-  color: #ff0000;
-  transform: rotateZ(-150deg);
-}
-
-.list .description {
-  color: #7d7d7d;
-}
-
-.list .signal {
-  font-weight: bold;
-}
-
-.list .signal.positive {
-  color: #00ff00;
-}
-
-.list .signal.negative {
-  color: #ff0000;
+.ionButton{
+  color: #fff;
+  background-color: #d93444;
+  border-color: #d93444;
 }

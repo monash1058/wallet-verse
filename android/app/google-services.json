@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "558113998837",
+    "project_id": "propay-1d8d7",
+    "storage_bucket": "propay-1d8d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558113998837:android:f29859d1f07a4b072a42bc",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558113998837-ng5131a64js1255b5hrnhgjft67mlt1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnmhdif0OgYVLgs2bSpv62S1eomva_GVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558113998837-ng5131a64js1255b5hrnhgjft67mlt1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

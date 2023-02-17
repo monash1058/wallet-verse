@@ -1,13 +1,5 @@
-<ion-header>
-    <!-- <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title style="text-align: center;">My E-wallet</ion-title>
-    </ion-toolbar> -->
-  </ion-header>
-  
-  <ion-content>
+<ion-content>
+    <!-- <div class="main-header"></div> -->
     <!-- <div class="container">
       <div class="mobile">
        
@@ -143,28 +135,15 @@
           </div>
       </div>
   </div> -->
-	<div class="wallet-container">
-    <div class="header">
-      <div class="navigation">
-          <i class="fas fa-arrow-left" [routerLink]="['/admin/tab-nav/dashboard']"></i>
-      </div>
-      <!-- <div class="filter">
-          <div class="calendar">
-              <i class="fa fa-calendar"></i>
-          </div>
-          <div class="option">2023</div>
-          <div class="select">
-              <i class="fas fa-angle-down"></i>
-          </div>
-      </div> -->
-  </div>
+	<!-- <div class="wallet-container">
   <div class="content">
     <div class="total">
         <div class="label">Total balance</div>
-        <div class="value">${{usersData?.amount}}</div>
-        <!-- <div class="balance">+ $3968,00</div> -->
+        <div class="value" *ngIf="!check">$*******</div>
+        <div class="value" *ngIf="check">${{usersData?.amount}}</div>
+        <div class="balance">  <ion-button (click)="checkBalance()" class="checkButton" shape="round"  size="small">Check Balance</ion-button></div>
     </div>
-    <!-- <div class="cards">
+    <div class="cards">
         <div class="card green">
             <div class="item">
                 <div class="label">Revenues</div>
@@ -276,7 +255,7 @@
                 <div class="value">2.58%</div>
             </div>
         </div>
-    </div> -->
+    </div> 
     <ul class="menu">
         <li>
             <input type="radio" id="tab1" name="amount" (change)="segmentChanged('tab1')"/>
@@ -294,7 +273,7 @@
         </li>
     </ul>
     <ion-list class="transactions" *ngIf="checked == 'tab1'">
-        <ion-item-group>
+        <ion-item-group  *ngIf="reciveHistoryData?.length > 0">
           <ion-item lines="full" *ngFor="let transaction of reciveHistoryData">
             <ion-thumbnail slot="start" class="ion-text-center">
               <img [src]="'assets/images/down-left-arrow.png'" />
@@ -312,9 +291,12 @@
             </ion-text>
           </ion-item>
         </ion-item-group>
+        <div class="no-result-found" *ngIf="reciveHistoryData?.length === 0">
+            <p>No History Found on IN-FLOW</p>
+        </div>
       </ion-list>
       <ion-list class="transactions" *ngIf="checked == 'tab2'">
-        <ion-item-group>
+        <ion-item-group *ngIf="sendHistoryData?.length > 0">
           <ion-item lines="full" *ngFor="let transaction of sendHistoryData">
             <ion-thumbnail slot="start" class="ion-text-center">
               <img [src]="'assets/images/up-right.png'" />
@@ -332,9 +314,87 @@
             </ion-text>
           </ion-item>
         </ion-item-group>
+        <div class="no-result-found" *ngIf="sendHistoryData?.length === 0">
+            <p>No History Found on OUT-FLOW</p>
+        </div>
       </ion-list>
 </div>
-</div>
+</div> -->
 
+
+    <p class="animation">Transactions History</p>
+    <div class="total">
+        <!-- <div class="label" class="animation">Total balance</div> -->
+        <!-- <div class="value" *ngIf="!check">$*******</div> -->
+        <ion-chip >
+            <ion-label class="ion-text-wrap"  *ngIf="!check">
+              $***
+            </ion-label> 
+            <ion-label class="ion-text-wrap"  *ngIf="check">
+              ${{usersData?.amount}}
+            </ion-label> 
+          </ion-chip>
+        <button (click)="checkBalance()" class="btn btn-danger btn-lg">Check Balance</button>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <ion-segment color="segment" [(ngModel)]="segment" mode="ios">
+            <ion-segment-button value="primary">
+              <ion-label style="color: #2dd36f;">Credited</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="segment">
+              <ion-label style="color: #eb445a;">Debited</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+    </div>
+    <div class="table-responsive mt-3" [ngSwitch]="segment">
+        <div class="wrapper">
+            <table class="table table-hover table-dark">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="col" style="font-size: 13px">Activity</th>
+                    <th scope="col" style="font-size: 13px">Date</th>
+                    <th scope="col" style="font-size: 13px">Amount</th>
+                  </tr>
+                </thead>
+                <tbody *ngSwitchCase="'primary'" class="text-center">
+                  <tr *ngFor="let transaction of reciveHistoryData">
+                    <td scope="row"> {{transaction?.sendBy}} </td>
+                    <td class="text-muted"> {{transaction?.createdAt | date :'short'}}</td>
+                    <td style="color: #2dd36f;">{{'$' + transaction?.amount}} </td>
+                  </tr>
+                  <div class="no-result-found" *ngIf="reciveHistoryData?.length === 0">
+                    <div> No History Found on Credited </div>
+                  </div>
+                </tbody>
+                <tbody *ngSwitchCase="'segment'" class="text-center">
+                        <tr *ngFor="let transaction of sendHistoryData">
+                            <td scope="row" > {{transaction?.reciveBy}} </td>
+                            <td class="text-muted">{{transaction?.createdAt | date :'short'}}</td>
+                            <td style="color: #eb445a;"> {{'-$' + transaction?.amount}} </td>
+                          </tr>
+                    <div class="no-result-found" *ngIf="sendHistoryData?.length == 0">
+                        <div> No History Found on Debited </div>
+                      </div>
+                  </tbody>
+              </table>
+        </div>
+
+    </div>
   </ion-content>
+
+  <!-- <ion-footer style="background-color: black;">
+    <div class="d-flex justify-content-between align-items-center results"> <span class="pl-md-3">Showing<b
+        class="text-white"> 1-7 0f 200 </b> trasactions</span>
+    <div class="pt-3">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item disabled"> <a class="page-link" aria-label="Previous"> <span
+                aria-hidden="true">&lt;</span> </a> </li>
+          <li class="page-item"> <a class="page-link" aria-label="Next"> <span
+                aria-hidden="true">&gt;</span> </a> </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  </ion-footer> -->
   

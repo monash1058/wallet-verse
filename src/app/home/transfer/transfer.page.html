@@ -13,7 +13,7 @@
   
     <ng-container>
       <ion-list lines="none">
-        <ion-item *ngFor="let user of getsData | filter: search; let i=index;" class="ion-margin-top" (click)="selectUser(user)">
+        <ion-item *ngFor="let user of getsData | filter: search; let i=index;" class="ion-margin-top" (click)="selectUser(user)" style="cursor: pointer;">
           <ion-thumbnail slot="start">
             <img src="../../../assets/images/man.png"/>
           </ion-thumbnail>
