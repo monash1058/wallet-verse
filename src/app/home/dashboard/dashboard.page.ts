@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import {Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -28,7 +29,12 @@ export class DashboardPage {
     {id: 2, vendor: 'Debited from Proinfocus', image: '', amount: -1200, time: '4:00PM'}
   ];
 
-  constructor(private router : Router, private toastr: ToastrCustomService, private modalCtrl: ModalController,private homeService: HomeService) {}
+  constructor(private router : Router, private toastr: ToastrCustomService, private modalCtrl: ModalController,private location: LocationStrategy,private homeService: HomeService) {
+    history.pushState(null, null, window.location.href);  
+    this.location.onPopState(() => {
+      history.pushState(null, null, window.location.href);
+    });  
+  }
 
   ionViewWillEnter() {
     this.getDashboardData();
@@ -53,8 +59,8 @@ export class DashboardPage {
       '_id':localStorage.getItem('_id')
     }
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
-      this.sendHistoryData = res.data.sendHistory.slice(0, 2)
-      this.reciveHistoryData = res.data.recivedHistory.slice(0, 2)
+      this.sendHistoryData = res.data.sendHistory.slice(0, 2);
+      this.reciveHistoryData = res.data.recivedHistory.slice(0, 2);
     });
   }
   navigate(item:any){

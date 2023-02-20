@@ -13,17 +13,17 @@ export class AuthInterceptor implements HttpInterceptor {
     private toastService: ToastrCustomService,
   ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (req.headers.get('skip') === 'true') {
+    
       if (req.headers.get('spinner') === 'false') {
         this.commonService.loadingSpinnerCall(false);
       } else {
         this.commonService.loadingSpinnerCall(true);
       }
-    } else {
       if (req.headers.get('search') !== 'true') {
         this.commonService.loadingSpinnerCall(true);
       }
-      const authorization = localStorage.getItem('success');
+      const authorization = localStorage.getItem('token');
+      console.log(authorization)
       if (!authorization) {
         this.route.navigateByUrl('/auth');
       } else {
@@ -31,12 +31,11 @@ export class AuthInterceptor implements HttpInterceptor {
           headers: new HttpHeaders({
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'content-type',
-            'authorization': `Bearer ${authorization}`,
+            'token': `${authorization}`,
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
           })
         });
       }
-    }
     // Sending request***
     return next.handle(req).pipe(
       catchError((error) => {

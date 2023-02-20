@@ -12,16 +12,25 @@
       <form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
       <div class="card">
         <div class="card-header" style="text-align: center;">
-          <div class="avatar-upload">
+          <div class="upload-container">
+            <div class="upload-image">
+              <img *ngIf="imgFile" [src]="imgFile" alt="Clinic Logo" title="Clinic Logo" />
+            </div>
+            <div class="upload-input">
+              <input type="file" id="myfile" name="myfile" accept="image/*" (change)="uploadFile($event.target)">
+              <label for="myfile" class="btn btn-danger btn-sm">Upload Photo</label>
+            </div>
+          </div>
+          <!-- <div class="avatar-upload">
             <div class="avatar-edit">
-              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
+              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event.target)" />
             </div>
             <div class="avatar-preview">
-              <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+              <div id="imagePreview" [style.backgroundImage]="'url('+ imgFile +')'">
               </div>
             </div>
           </div>
-          <button class="btn btn-danger btn-sm" (click)="fileInput.click()">Upload Image</button>
+          <label class="btn btn-danger btn-sm" for="imageUpload">Upload Image</label> -->
         </div>    
         <h4 style="color: white;">Edit Profile</h4>
         <div class="card-body">

@@ -140,3 +140,76 @@ background-color: white;
   background-position: center;
 }
 
+.get-started-profile-img {
+  width: 30%;
+
+}
+
+.upload-container {
+  text-align: center;
+  margin: 0 auto 0px auto;
+  .upload-image {
+    width: 120px;
+    height: 120px;
+            position: relative;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+            background-color: #F7F7F7;
+            border: 1px solid #ECECEC;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+            justify-content: center;
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+    i.fa-user-circle {
+      width: 140px;
+      height: 140px;
+                font-size: 126px;
+                color: #E5E5E5;
+                padding: 7px;
+            }
+            .camera-btn {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 42px;
+                height: 42px;
+                background: #FFFFFF;
+                border: 1px solid #ECECEC;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                outline: none;
+                z-index: 1;
+                i {
+                    font-size: 18px;
+                    color: #000000;
+                }
+            }
+  }
+  .upload-input {
+    position: relative;
+    input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      z-index: -1;
+    }
+    label {
+      font-size: 18px;
+                color: #FFFFFF;
+                font-weight: 300;
+                line-height: 22px;
+                letter-spacing: 0.36px;
+      cursor: pointer;
+    }
+  }
+}

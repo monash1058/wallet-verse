@@ -54,7 +54,7 @@ export class RegistrationPage implements OnInit {
     }
      this.authService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       localStorage.setItem('_id', res.data._id);
-      localStorage.setItem('success', res.success);
+      localStorage.setItem('token', res.data.jwt);
       localStorage.setItem('amount', res.data.amount);
       this.toastr.success("Registered Successfully");
        this.router.navigate(['../../../admin/tab-nav/dashboard']);

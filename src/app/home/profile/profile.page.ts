@@ -15,8 +15,7 @@ export class ProfilePage implements OnInit {
   @ViewChild('fileInput') el: ElementRef;
   formData: FormGroup;
   logo: any;
-  imageUrl: any = '../../../assets/images/man.png';
-  imgFile:any;
+  imgFile:any = null;
   usersData: any;
   check = false;
   constructor(private homeService: HomeService,private cd: ChangeDetectorRef, private toastr: ToastrCustomService, private router : Router,private fb: FormBuilder) { }
@@ -32,44 +31,40 @@ export class ProfilePage implements OnInit {
     this.getDashboardData();
   }
 
-  uploadFile(event) {
-    let reader = new FileReader(); // HTML5 FileReader API
-    let file = event.target.files[0];
-    this.imgFile = event.target.files[0];
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(file);
-
-      // When file uploads set it to file formcontrol
-      reader.onload = () => {
-        this.imageUrl = reader.result;
-        console.log(this.imageUrl)
-        this.formData.patchValue({
-          file: reader.result
-        });
+  uploadFile(input) {
+    if (input.files && input.files[0]) {
+      if (input.files[0].type == 'image/png' || input.files[0].type == 'image/jpeg' || input.files[0].type == 'image/jpg') {
+        let reader = new FileReader();
+        reader.onload = (event: ProgressEvent) => {
+          this.imgFile = (<FileReader>event.target).result;
+        }
+        reader.readAsDataURL(input.files[0]);
+        this.logo = input.files[0];
       }
-      // ChangeDetectorRef since file is loading outside the zone
-      this.cd.markForCheck();        
+      else {
+        this.toastr.warning("Please choose Image file");
+      }
     }
   }
 
   onClickSubmit() {
-    var formData: any = new FormData();
-    formData.append('_id', localStorage.getItem('_id'));
-    formData.append('name', this.formData.get('name').value);
-    formData.append('password', this.formData.get('password').value);
-    formData.append('profileImage', this.imgFile);
-    if(!this.formData.valid) {
-      this.formData.markAllAsTouched();
-      return;
-    }
-    const path = "api/user/editProfile";
-    this.homeService.postMethod(path, formData).pipe(take(1)).subscribe((res: any) => {
-      this.toastr.success(res.message);
-      setTimeout(function(){
-        this.router.navigate(['../auth/login']);
-        localStorage.clear();
-      },5000);
-    });
+      var formData: any = new FormData();
+      formData.append('_id', localStorage.getItem('_id'));
+      formData.append('name', this.formData.get('name').value);
+      formData.append('password', this.formData.get('password').value);
+      formData.append('profileImage', this.logo);
+      if(!this.formData.valid) {
+        this.formData.markAllAsTouched();
+        return;
+      }
+      const path = "api/user/editProfile";
+      this.homeService.postMethod(path, formData).pipe(take(1)).subscribe((res: any) => {
+        this.toastr.success(res.message);
+        setTimeout(function(){
+          this.router.navigate(['/']);
+          localStorage.clear();
+        },5000);
+      });
   }
   logout() {
     localStorage.clear();
@@ -86,7 +81,7 @@ export class ProfilePage implements OnInit {
       this.check = false;
       this.usersData = res.data;
       this.formData.patchValue({name: res.data.name});
-      this.imageUrl = res.data.profileImage
+      this.imgFile = res.data.profileImage
     });
   }
   checkBalance(){

@@ -42,7 +42,8 @@ export class LoginPage implements OnInit {
     this.authService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       if (res.success) {
         localStorage.setItem('_id', res.data._id);
-        localStorage.setItem('success', res.success);
+        console.log(res.data.jwt)
+        localStorage.setItem('token', res.data.jwt);
         localStorage.setItem('amount', res.data.amount);
         this.toastr.success("Login Successfully");
         this.router.navigate(['../../../admin/tab-nav/dashboard']);
