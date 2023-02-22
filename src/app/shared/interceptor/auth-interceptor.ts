@@ -23,19 +23,23 @@ export class AuthInterceptor implements HttpInterceptor {
         this.commonService.loadingSpinnerCall(true);
       }
       const authorization = localStorage.getItem('token');
-      console.log(authorization)
-      if (!authorization) {
-        this.route.navigateByUrl('/auth');
+      if(req.headers.get('skip') !=='true'){
+        if (!authorization) {
+          this.route.navigateByUrl('/auth');
+        } 
       } else {
-        req = req.clone({
-          headers: new HttpHeaders({
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'content-type',
-            'token': `${authorization}`,
-            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
-          })
-        });
+        if (authorization) {
+          req = req.clone({
+            headers: new HttpHeaders({
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': 'content-type',
+              'token': `${authorization}`,
+              'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+            })
+          });
+        } 
       }
+
     // Sending request***
     return next.handle(req).pipe(
       catchError((error) => {

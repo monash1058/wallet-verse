@@ -30,7 +30,7 @@ export class RegistrationPage implements OnInit {
     this.type = !this.type;
   }
 
-  verify(event){
+  verify(event:any){
     if(event.target.value.length == 8){
     const path = `api/user/verifyNumber/${event.target.value}`;
     this.authService.getMethod(path).pipe(take(1)).subscribe((res: any) => {
