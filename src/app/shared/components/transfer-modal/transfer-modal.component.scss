@@ -8,7 +8,7 @@
         margin-top: auto;
         margin-bottom: auto;
         width: 414px;
-        background-color: rgba(0,0,0,0.5) !important;
+        background-color: rgb(12 13 14 / 86%) !important;
     }
     .image {
         width: 109px;
@@ -72,7 +72,7 @@
     }
     
     ion-content {
-        --background: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg') no-repeat 100% 100%;
+        --background: url('../../../../assets/images/img1.jpg') no-repeat 100% 100%;
         background-size: cover;
         background-repeat: no-repeat;
         height: 100%;
