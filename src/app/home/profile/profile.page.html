@@ -2,24 +2,29 @@
   <ion-item lines="none">
     <ion-text slot="start" color="light" style="color:black">Welcome, {{usersData?.name}}</ion-text>
     <img src="../../../assets/images/wave.png" style="width: 20px;height: 20px;margin-left: -26px;position: fixed;"/>
-    <ion-icon name="log-out-outline"  slot="end" (click)="logout()"></ion-icon>
+    <ion-icon name="log-out-outline"  slot="end" (click)="logout()" style="cursor: pointer;"></ion-icon>
   </ion-item>
 </ion-header>
 
 <ion-content fullscreen>
   <div class="container">
+    <!-- <div id="login_title">
+      <img class="logo" src="../../../assets/images/logo.png"/>
+      <h2 class="text">PRO-PAY</h2>
+      <div class="under_login"></div>
+  </div> -->
     <div class="d-flex justify-content-center">
       <form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
       <div class="card">
         <div class="card-header" style="text-align: center;">
           <div class="upload-container">
             <div class="upload-image">
-              <img src="../../../assets/images/man.png" alt="Clinic Logo" title="Clinic Logo" />
+                <h1 style="margin: 5px 0px 0px 0px;font-size: 50px;">{{usersData?.name?.charAt(0)}}</h1>
             </div>
-            <div class="upload-input">
+            <!-- <div class="upload-input">
               <input type="file" id="myfile" name="myfile" accept="image/*" (change)="uploadFile($event.target)">
               <label for="myfile" class="btn btn-danger btn-sm">Upload Photo</label>
-            </div>
+            </div> -->
           </div>
           <!-- <div class="avatar-upload">
             <div class="avatar-edit">

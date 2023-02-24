@@ -24,7 +24,7 @@ export class ProfilePage implements OnInit {
     this.formData = this.fb.group({
       name: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$#!_%*?&])[A-Za-z\d$@$!%*?&].{7,30}")]],
-      file: [null],
+      // file: [null],
    });
   }
   ionViewWillEnter() {
@@ -48,21 +48,27 @@ export class ProfilePage implements OnInit {
   }
 
   onClickSubmit() {
-      var formData: any = new FormData();
-      formData.append('_id', localStorage.getItem('_id'));
-      formData.append('name', this.formData.get('name').value);
-      formData.append('password', this.formData.get('password').value);
-      formData.append('profileImage', this.logo);
+      // var formData: any = new FormData();
+      // formData.append('_id', localStorage.getItem('_id'));
+      // formData.append('name', this.formData.get('name').value);
+      // formData.append('password', this.formData.get('password').value);
+      // formData.append('profileImage', this.logo);
+      let datas = {
+        '_id':localStorage.getItem('_id'),
+        'name': this.formData.value.name,
+        'password': this.formData.value.password
+      }
       if(!this.formData.valid) {
         this.formData.markAllAsTouched();
         return;
       }
       const path = "api/user/editProfile";
-      this.homeService.postMethod(path, formData).pipe(take(1)).subscribe((res: any) => {
+      this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
         this.toastr.success(res.message);
-        setTimeout(function(){
-          this.router.navigate(['/']);
+        setTimeout(() => {
           localStorage.clear();
+          this.router.navigate(['/']);
+          this.toastr.success('Password Changed Successfully, Please Login');
         },5000);
       });
   }

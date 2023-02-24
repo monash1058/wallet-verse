@@ -14,9 +14,9 @@
     <ng-container>
       <ion-list lines="none">
         <ion-item *ngFor="let user of getsData | filter: search; let i=index;" class="ion-margin-top" (click)="selectUser(user)" style="cursor: pointer;">
-          <ion-thumbnail slot="start">
-            <img src="../../../assets/images/man.png"/>
-          </ion-thumbnail>
+          <ion-avatar slot="start" style="cursor: pointer;background-color: darkgrey;">
+            <h1 style="margin: 5px 0px 0px 12px;">{{user?.name?.charAt(0)}}</h1>
+          </ion-avatar>
           <ion-label>
             <ion-text>{{ user?.name }}</ion-text>
             <p>

@@ -51,6 +51,10 @@ export class DashboardPage {
       this.usersData = res.data;
     });
   }
+  name(event){
+    console.log();
+    // return event?.name?.charAt(0)
+  }
   getData(){
     this.sendHistoryData = [];
     this.reciveHistoryData = [];
