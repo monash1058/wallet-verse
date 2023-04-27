@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar color="white">
       <ion-searchbar
         [animated]="true"
@@ -7,11 +7,477 @@
         placeholder="Search by name or number..."
         [(ngModel)]="search"></ion-searchbar>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
   
   <ion-content>
+
+    <ion-content>
+      <!-- <div class="main-header"></div> -->
+      <!-- <div class="container">
+        <div class="mobile">
+         
+            <div class="content">
+                <div class="total">
+                    <div class="label">Total balance</div>
+                    <div class="value">$32,058.98</div>
+                    <div class="balance">+ $3968,00</div>
+                </div>
+                <div class="cards">
+                    <div class="card green">
+                        <div class="item">
+                            <div class="label">Revenues</div>
+                            <div class="value">$890.30</div>
+                        </div>
+                        <div class="balance">
+                            <div class="arrow-up">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="value">0.30%</div>
+                        </div>
+                    </div>
+                    <div class="card magenta">
+                        <div class="item">
+                            <div class="label">Revenues</div>
+                            <div class="value">$890.30</div>
+                        </div>
+                        <div class="balance">
+                            <div class="arrow-up">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="value">0.30%</div>
+                        </div>
+                    </div>
+                    <div class="card gray">
+                        <div class="item">
+                            <div class="label">Saving</div>
+                            <div class="value">$138.10</div>
+                        </div>
+                        <div class="balance">
+                            <div class="arrow-up">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="value">2.58%</div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="menu">
+                    <li>
+                        <input type="radio" id="tab1" name="amount" checked="checked" />
+                        <label for="tab1">
+                            <i class="fas fa-arrow-up"></i>
+                            Activities</label>
   
-    <ng-container>
+                    </li>
+                    <li>
+                        <input type="radio" id="tab2" name="amount" />
+                        <label for="tab2">
+                            <i class="fas fa-arrow-up"></i>
+                            Statistics</label>
+  
+                    </li>
+                    <li>
+                        <input type="radio" id="tab3" name="amount" />
+                        <label for="tab3">
+                            <i class="fas fa-arrow-up"></i>
+                            Summary</label>
+  
+                    </li>
+                </ul>
+                <div class="list">
+                    <div class="item1">
+                        <div class="section1">
+                            <div class="icon down">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="text">
+                                <div class="title">iTunes Gift Card #22338</div>
+                                <div class="description">Today, 13:45</div>
+                            </div>
+                        </div>
+                        <div class="section2">
+                            <div class="signal negative">-</div>
+                            <div class="value">$198.25</div>
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <div class="section1">
+                            <div class="icon up">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="text">
+                                <div class="title">Self Deposit ING BANK</div>
+                                <div class="description">Today, 13:45</div>
+                            </div>
+                        </div>
+                        <div class="section2">
+                            <div class="signal positive">+</div>
+                            <div class="value">$260.00</div>
+                        </div>
+                    </div>
+                    <div class="item3">
+                        <div class="section1">
+                            <div class="icon down">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="text">
+                                <div class="title">Paypal Transfer</div>
+                                <div class="description">July 23, 2016</div>
+                            </div>
+                        </div>
+                        <div class="section2">
+                            <div class="signal negative">-</div>
+                            <div class="value">$840.20</div>
+                        </div>
+                    </div>
+                    <div class="item4">
+                        <div class="section1">
+                            <div class="icon up">
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                            <div class="text">
+                                <div class="title">Self Deposit ING BANK</div>
+                                <div class="description">Today, 13:45</div>
+                            </div>
+                        </div>
+                        <div class="section2">
+                            <div class="signal positive">+</div>
+                            <div class="value">$260.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="wallet-container">
+    <div class="content">
+      <div class="total">
+          <div class="label">Total balance</div>
+          <div class="value" *ngIf="!check">$*******</div>
+          <div class="value" *ngIf="check">${{usersData?.amount}}</div>
+          <div class="balance">  <ion-button (click)="checkBalance()" class="checkButton" shape="round"  size="small">Check Balance</ion-button></div>
+      </div>
+      <div class="cards">
+          <div class="card green">
+              <div class="item">
+                  <div class="label">Revenues</div>
+                  <div class="value">$890.30</div>
+              </div>
+              <div class="balance">
+                  <div class="arrow-up">
+                      <i class="fas fa-arrow-up"></i>
+                  </div>
+                  <div class="value">0.30%</div>
+              </div>
+          </div>
+          <div class="card magenta">
+            <div class="item">
+                <div class="label">Revenues</div>
+                <div class="value">$890.30</div>
+            </div>
+            <div class="balance">
+                <div class="arrow-up">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <div class="value">0.30%</div>
+            </div>
+        </div>
+        <div class="card green">
+          <div class="item">
+              <div class="label">Revenues</div>
+              <div class="value">$890.30</div>
+          </div>
+          <div class="balance">
+              <div class="arrow-up">
+                  <i class="fas fa-arrow-up"></i>
+              </div>
+              <div class="value">0.30%</div>
+          </div>
+      </div>
+          <div class="card magenta">
+              <div class="item">
+                  <div class="label">Revenues</div>
+                  <div class="value">$890.30</div>
+              </div>
+              <div class="balance">
+                  <div class="arrow-up">
+                      <i class="fas fa-arrow-up"></i>
+                  </div>
+                  <div class="value">0.30%</div>
+              </div>
+          </div>
+          <div class="card magenta">
+            <div class="item">
+                <div class="label">Revenues</div>
+                <div class="value">$890.30</div>
+            </div>
+            <div class="balance">
+                <div class="arrow-up">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <div class="value">0.30%</div>
+            </div>
+        </div>
+  
+        <div class="card gray">
+          <div class="item">
+              <div class="label">Saving</div>
+              <div class="value">$138.10</div>
+          </div>
+          <div class="balance">
+              <div class="arrow-up">
+                  <i class="fas fa-arrow-up"></i>
+              </div>
+              <div class="value">2.58%</div>
+          </div>
+      </div>
+      <div class="card magenta">
+        <div class="item">
+            <div class="label">Revenues</div>
+            <div class="value">$890.30</div>
+        </div>
+        <div class="balance">
+            <div class="arrow-up">
+                <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="value">0.30%</div>
+        </div>
+    </div>
+  
+    <div class="card gray">
+      <div class="item">
+          <div class="label">Saving</div>
+          <div class="value">$138.10</div>
+      </div>
+      <div class="balance">
+          <div class="arrow-up">
+              <i class="fas fa-arrow-up"></i>
+          </div>
+          <div class="value">2.58%</div>
+      </div>
+  </div>
+  
+          <div class="card gray">
+              <div class="item">
+                  <div class="label">Saving</div>
+                  <div class="value">$138.10</div>
+              </div>
+              <div class="balance">
+                  <div class="arrow-up">
+                      <i class="fas fa-arrow-up"></i>
+                  </div>
+                  <div class="value">2.58%</div>
+              </div>
+          </div>
+      </div> 
+      <ul class="menu">
+          <li>
+              <input type="radio" id="tab1" name="amount" (change)="segmentChanged('tab1')"/>
+              <label for="tab1">
+                  <i class="fas fa-arrow-down"></i>
+                  In-flow</label>
+  
+          </li>
+          <li>
+              <input type="radio" id="tab2" name="amount" (change)="segmentChanged('tab2')"/>
+              <label for="tab2">
+                  <i class="fas fa-arrow-up"></i>
+                  Out-flow</label>
+  
+          </li>
+      </ul>
+      <ion-list class="transactions" *ngIf="checked == 'tab1'">
+          <ion-item-group  *ngIf="reciveHistoryData?.length > 0">
+            <ion-item lines="full" *ngFor="let transaction of reciveHistoryData">
+              <ion-thumbnail slot="start" class="ion-text-center">
+                <img [src]="'assets/images/down-left-arrow.png'" />
+              </ion-thumbnail>
+              <ion-label>
+                <ion-text color="primary">{{transaction?.sendBy}}</ion-text>
+                <p>
+                  <ion-text>
+                    {{transaction?.createdAt | date: 'MMM d, y'}}
+                  </ion-text>
+                </p>
+              </ion-label>
+              <ion-text slot="end" color="primary">
+                {{'$' + transaction?.amount}}
+              </ion-text>
+            </ion-item>
+          </ion-item-group>
+          <div class="no-result-found" *ngIf="reciveHistoryData?.length === 0">
+              <p>No History Found on IN-FLOW</p>
+          </div>
+        </ion-list>
+        <ion-list class="transactions" *ngIf="checked == 'tab2'">
+          <ion-item-group *ngIf="sendHistoryData?.length > 0">
+            <ion-item lines="full" *ngFor="let transaction of sendHistoryData">
+              <ion-thumbnail slot="start" class="ion-text-center">
+                <img [src]="'assets/images/up-right.png'" />
+              </ion-thumbnail>
+              <ion-label>
+                <ion-text color="primary">{{transaction?.reciveBy}}</ion-text>
+                <p>
+                  <ion-text>
+                    {{transaction?.createdAt | date: 'MMM d, y'}}
+                  </ion-text>
+                </p>
+              </ion-label>
+              <ion-text slot="end" color="primary">
+                {{'-₹' + transaction?.amount}}
+              </ion-text>
+            </ion-item>
+          </ion-item-group>
+          <div class="no-result-found" *ngIf="sendHistoryData?.length === 0">
+              <p>No History Found on OUT-FLOW</p>
+          </div>
+        </ion-list>
+  </div>
+  </div> -->
+  
+  
+      <!-- <p class="animation">Transactions History</p> -->
+      <!-- <div class="total">
+          <ion-chip >
+              <ion-label class="ion-text-wrap"  *ngIf="!check">
+                $***
+              </ion-label> 
+              <ion-label class="ion-text-wrap"  *ngIf="check">
+                ${{usersData?.amount}}
+              </ion-label> 
+            </ion-chip>
+          <button (click)="checkBalance()" class="btn btn-danger btn-lg">Check Balance</button>
+      </div> -->
+      <!-- <div class="d-flex justify-content-between align-items-center mt-3">
+          <ion-segment color="segment" [(ngModel)]="segment" mode="ios">
+              <ion-segment-button value="primary">
+                <ion-label style="color: #2dd36f;">Credited</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="segment">
+                <ion-label style="color: #eb445a;">Debited</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+      </div> -->
+      <body>
+      
+          <!-- App Header -->
+          <div class="appHeader">
+              <!-- <div class="left">
+                  <a href="#" class="headerButton goBack">
+                      <ion-icon name="chevron-back-outline"></ion-icon>
+                  </a>
+              </div> -->
+              <div class="pageTitle">
+                  Transfer Money
+              </div>
+              <!-- <div class="right">
+                  <a href="app-notifications.html" class="headerButton">
+                      <ion-icon class="icon" name="notifications-outline"></ion-icon>
+                      <span class="badge badge-danger">4</span>
+                  </a>
+              </div> -->
+          </div>
+       
+           
+      
+          <!-- * App Header -->
+      
+      
+          <!-- App Capsule -->
+          <div id="appCapsule">
+            <ion-searchbar
+            [animated]="true"
+            debounce="800"
+            #searchInput
+            placeholder="Search by Name or Number..."
+            [(ngModel)]="search"></ion-searchbar>
+              <!-- Transactions -->
+              <div class="section mt-2">
+                  <div class="transactions">
+                      <!-- item -->
+                      <a class="item" *ngFor="let user of getsData | filter: search; let i=index;"  (click)="selectUser(user)" style="cursor: pointer;">
+                          <div class="detail">
+                            <ion-avatar slot="start" style="cursor: pointer;background-color: darkgrey;">
+                              <h1 style="margin: 14px 0px 0px 21px;">{{user?.name?.charAt(0)}}</h1>
+                            </ion-avatar>
+                              <!-- <img [src]="user?.name?.charAt(0)" alt="img" class="image-block imaged w48"> -->
+                              <div style="padding-left: 20px;">
+                                  <strong>{{ user?.name }}</strong>
+                                  <p>{{user?.phone}}</p>
+                              </div>
+                          </div>
+                          <!-- <div class="right">
+                              <div class="price text-danger"></div>
+                          </div> -->
+                      </a>
+                
+                  </div>
+              </div>
+        
+              <!-- * Transactions -->
+      
+              <!-- <div class="section mt-2 mb-2">
+                  <a href="#" class="btn btn-primary btn-block btn-lg">Load More</a>
+              </div> -->
+          </div>
+          <!-- * App Capsule -->
+      </body>
+      <!-- <div class="table-responsive mt-3" [ngSwitch]="segment">
+          <div class="wrapper"> -->
+               <!-- App Capsule -->
+   
+      <!-- * App Capsule -->
+              <!-- <table class="table table-hover table-dark">
+                  <thead>
+                    <tr class="text-center">
+                      <th scope="col" style="font-size: 13px">Activity</th>
+                      <th scope="col" style="font-size: 13px">Date</th>
+                      <th scope="col" style="font-size: 13px">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngSwitchCase="'primary'" class="text-center">
+                    <tr *ngFor="let transaction of reciveHistoryData">
+                      <td scope="row"> {{transaction?.sendBy}} </td>
+                      <td class="text-muted"> {{transaction?.createdAt | date :'short'}}</td>
+                      <td style="color: #2dd36f;">{{'$' + transaction?.amount}} </td>
+                    </tr>
+                    <div class="no-result-found" *ngIf="reciveHistoryData?.length === 0">
+                      <div> No History Found on Credited </div>
+                    </div>
+                  </tbody>
+                  <tbody *ngSwitchCase="'segment'" class="text-center">
+                          <tr *ngFor="let transaction of sendHistoryData">
+                              <td scope="row" > {{transaction?.reciveBy}} </td>
+                              <td class="text-muted">{{transaction?.createdAt | date :'short'}}</td>
+                              <td style="color: #eb445a;"> {{'-$' + transaction?.amount}} </td>
+                            </tr>
+                      <div class="no-result-found" *ngIf="sendHistoryData?.length == 0">
+                          <div> No History Found on Debited </div>
+                        </div>
+                    </tbody>
+                </table> -->
+          <!-- </div>
+  
+      </div> -->
+    </ion-content>
+  
+    <!-- <ion-footer style="background-color: black;">
+      <div class="d-flex justify-content-between align-items-center results"> <span class="pl-md-3">Showing<b
+          class="text-white"> 1-7 0f 200 </b> trasactions</span>
+      <div class="pt-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item disabled"> <a class="page-link" aria-label="Previous"> <span
+                  aria-hidden="true">&lt;</span> </a> </li>
+            <li class="page-item"> <a class="page-link" aria-label="Next"> <span
+                  aria-hidden="true">&gt;</span> </a> </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    </ion-footer> -->
+    
+  
+    <!-- <ng-container>
       <ion-list lines="none">
         <ion-item *ngFor="let user of getsData | filter: search; let i=index;" class="ion-margin-top" (click)="selectUser(user)" style="cursor: pointer;">
           <ion-avatar slot="start" style="cursor: pointer;background-color: darkgrey;">
@@ -24,20 +490,20 @@
                 {{user?.phone}}
               </ion-text>
             </p>
-            <!-- <p>
+            <p>
               <ion-text>
                 {{store?.location}}
               </ion-text>
-            </p> -->
-            <!-- <p>
+            </p>
+            <p>
               <ion-text>
                 <ion-icon name="time"></ion-icon> {{store?.delivery_time}} MINS
               </ion-text>
-            </p> -->
+            </p>
           </ion-label>
         </ion-item>
       </ion-list>
-    </ng-container>
+    </ng-container> -->
     <!-- <ng-container *ngIf="usersData?.length == 0">
         <div style="text-align:center">
             <br /><br />

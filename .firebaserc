@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "e-wallet-d335b"
-  }
+    "default": "pro-pay-22dd1",
+    "production": "pro-pay-22dd1"
+  },
+  "targets": {},
+  "etags": {}
 }

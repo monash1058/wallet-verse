@@ -1,3 +1,16 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-segment value="primary" [(ngModel)]="segment">
+        <ion-segment-button value="primary">
+          <ion-label>Credited</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="segment">
+          <ion-label>Debited</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+
 <ion-content>
     <!-- <div class="main-header"></div> -->
     <!-- <div class="container">
@@ -322,10 +335,8 @@
 </div> -->
 
 
-    <p class="animation">Transactions History</p>
-    <div class="total">
-        <!-- <div class="label" class="animation">Total balance</div> -->
-        <!-- <div class="value" *ngIf="!check">$*******</div> -->
+    <!-- <p class="animation">Transactions History</p> -->
+    <!-- <div class="total">
         <ion-chip >
             <ion-label class="ion-text-wrap"  *ngIf="!check">
               $***
@@ -335,8 +346,8 @@
             </ion-label> 
           </ion-chip>
         <button (click)="checkBalance()" class="btn btn-danger btn-lg">Check Balance</button>
-    </div>
-    <div class="d-flex justify-content-between align-items-center mt-3">
+    </div> -->
+    <!-- <div class="d-flex justify-content-between align-items-center mt-3">
         <ion-segment color="segment" [(ngModel)]="segment" mode="ios">
             <ion-segment-button value="primary">
               <ion-label style="color: #2dd36f;">Credited</ion-label>
@@ -345,10 +356,84 @@
               <ion-label style="color: #eb445a;">Debited</ion-label>
             </ion-segment-button>
           </ion-segment>
-    </div>
-    <div class="table-responsive mt-3" [ngSwitch]="segment">
-        <div class="wrapper">
-            <table class="table table-hover table-dark">
+    </div> -->
+    <body>
+    
+        <!-- App Header -->
+        <div class="appHeader">
+            <!-- <div class="left">
+                <a href="#" class="headerButton goBack">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </a>
+            </div> -->
+            <div class="pageTitle">
+                Transactions History
+            </div>
+            <!-- <div class="right">
+                <a href="app-notifications.html" class="headerButton">
+                    <ion-icon class="icon" name="notifications-outline"></ion-icon>
+                    <span class="badge badge-danger">4</span>
+                </a>
+            </div> -->
+        </div>
+        <!-- * App Header -->
+    
+    
+        <!-- App Capsule -->
+        <div id="appCapsule">
+    
+            <!-- Transactions -->
+            <div class="section mt-2" [ngSwitch]="segment">
+                <div class="transactions" *ngSwitchCase="'primary'">
+                    <!-- item -->
+                    <a class="item"  *ngFor="let transaction of reciveHistoryData">
+                        <div class="detail">
+                          <ion-avatar slot="start" style="cursor: pointer;background-color: darkgrey;">
+                            <h1 style="margin: 14px 0px 0px 21px;">{{transaction?.sendBy?.charAt(0)}}</h1>
+                          </ion-avatar>
+                            <!-- <img [src]="user?.name?.charAt(0)" alt="img" class="image-block imaged w48"> -->
+                            <div style="padding-left: 20px;">
+                                <strong>{{transaction?.sendBy}}</strong>
+                                <p>{{transaction?.createdAt | date :'short'}}</p>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="price text-success"> + {{'$' + transaction?.amount}}</div>
+                        </div>
+                    </a>
+                   
+                </div>
+                <div class="transactions" *ngSwitchCase="'segment'">
+                <a class="item" *ngFor="let transaction of sendHistoryData">
+                    <div class="detail">
+                      <ion-avatar slot="start" style="cursor: pointer;background-color: darkgrey;">
+                        <h1 style="margin: 14px 0px 0px 21px;">{{transaction?.reciveBy?.charAt(0)}}</h1>
+                      </ion-avatar>
+                        <!-- <img [src]="user?.name?.charAt(0)" alt="img" class="image-block imaged w48"> -->
+                        <div style="padding-left: 20px;">
+                            <strong>{{transaction?.reciveBy}}</strong>
+                            <p>{{transaction?.createdAt | date :'short'}}</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="price text-danger"> - {{'$' + transaction?.amount}}</div>
+                    </div>
+                </a>
+                </div>
+            </div>
+            <!-- * Transactions -->
+        </div>
+        <!-- * App Capsule -->
+
+    
+    
+    </body>
+    <!-- <div class="table-responsive mt-3" [ngSwitch]="segment">
+        <div class="wrapper"> -->
+             <!-- App Capsule -->
+ 
+    <!-- * App Capsule -->
+            <!-- <table class="table table-hover table-dark">
                 <thead>
                   <tr class="text-center">
                     <th scope="col" style="font-size: 13px">Activity</th>
@@ -376,11 +461,11 @@
                         <div> No History Found on Debited </div>
                       </div>
                   </tbody>
-              </table>
-        </div>
+              </table> -->
+        <!-- </div>
 
-    </div>
-  </ion-content>
+    </div> -->
+</ion-content>
 
   <!-- <ion-footer style="background-color: black;">
     <div class="d-flex justify-content-between align-items-center results"> <span class="pl-md-3">Showing<b

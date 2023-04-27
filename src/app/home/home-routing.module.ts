@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'link-banks',
         loadChildren: () => import('./link-banks/link-banks.module').then( m => m.LinkBanksPageModule)
       },
+      {
+        path: 'history-detail',
+        loadChildren: () => import('./history-detail/history-detail.module').then( m => m.HistoryDetailPageModule)
+      }
     ]
   },
   {

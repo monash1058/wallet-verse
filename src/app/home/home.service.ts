@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -12,7 +12,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class HomeService {
   baseUrl: any = environment.backendApi;
+  goldUrl: any = environment.goldApi;
   errorOccured = new BehaviorSubject<boolean>(false);
+  headers = new HttpHeaders({"x-access-token": "goldapi-q364x8drlgvsdpdw-io"});
   constructor(
     private commonService: CommonService,
     private route: Router,
@@ -38,6 +40,14 @@ export class HomeService {
   }
   getMethod(path: any) {
     return this.http.get(this.baseUrl + path, { headers: { skip: 'true' } }).pipe(
+      map(data => {
+        this.commonService.loadingSpinnerCall(false);
+        return data;
+      })
+    );
+  }
+  getGoldMethod(path: any) {
+    return this.http.get(this.goldUrl + path, {headers: this.headers}).pipe(
       map(data => {
         this.commonService.loadingSpinnerCall(false);
         return data;

@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
         localStorage.setItem('_id', res.data._id);
         console.log(res.data.jwt)
         localStorage.setItem('token', res.data.jwt);
-        localStorage.setItem('amount', res.data.amount);
+        // localStorage.setItem('amount', res.data.amount);
         this.toastr.success("Login Successfully");
         this.router.navigate(['../../../admin/tab-nav/dashboard']);
         this.formData.reset();

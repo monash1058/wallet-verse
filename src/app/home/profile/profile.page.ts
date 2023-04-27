@@ -67,14 +67,14 @@ export class ProfilePage implements OnInit {
         this.toastr.success(res.message);
         setTimeout(() => {
           localStorage.clear();
-          this.router.navigate(['/']);
+          this.router.navigate(['/auth/login']);
           this.toastr.success('Password Changed Successfully, Please Login');
         },5000);
       });
   }
   logout() {
     localStorage.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth/login']);
     this.toastr.success('User Sucessfully Logged Out');
   }
   getDashboardData(){

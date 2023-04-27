@@ -19,7 +19,7 @@ export class AppComponent {
     public alertController: AlertController,
     private platform: Platform
   ) {
-    this.initializeApp() 
+    // this.initializeApp()
     // this.fcmService.initPush()
   }
 
@@ -27,6 +27,10 @@ export class AppComponent {
     this.commonSer.loadingSpinner.subscribe((data: boolean) => {
       this.loadingSpninerHide = data;
       this.cdRef.detectChanges();
+      // setTimeout(() => {                          
+        
+      // }, 3000);
+     
     });
   }
 

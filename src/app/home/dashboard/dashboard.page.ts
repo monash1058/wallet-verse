@@ -1,7 +1,7 @@
 import { LocationStrategy } from '@angular/common';
 import {Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 import { TransferModalComponent } from 'src/app/shared/components/transfer-modal/transfer-modal.component';
 import { ToastrCustomService } from 'src/app/shared/service/toastr.service';
@@ -17,19 +17,11 @@ export class DashboardPage {
   check = false;
   sendHistoryData: any[] = [];
   reciveHistoryData: any[] = [];
-  features: any[] = [
-    {id: 1, name: 'Account', src: 'assets/icons/top-up.png', background: 'rgba(27,150,181, 0.1)', page: ''},
-    {id: 2, name: 'Transfer to', src: 'assets/icons/cash-withdrawal.png', background: 'rgba(106,100,255, 0.1)', page: ''},
-    {id: 3, name: 'Transactions', src: 'assets/icons/send.png', background: 'rgba(255, 196, 9, 0.1)', page: ''},
-    {id: 4, name: 'Top-up', src: 'assets/icons/debit-card.png', background: 'rgba(27,150,181, 0.1)', page: ''},
-  ];
+  users:any;
+  goldData: number;
+  goldValue: any;
 
-  transactions: any[] = [
-    {id: 1, vendor: 'Credited from Proinfocus', image: '', amount: 1500, time: '3:00PM'},
-    {id: 2, vendor: 'Debited from Proinfocus', image: '', amount: -1200, time: '4:00PM'}
-  ];
-
-  constructor(private router : Router, private toastr: ToastrCustomService, private modalCtrl: ModalController,private location: LocationStrategy,private homeService: HomeService) {
+  constructor(private actionSheetCtrl: ActionSheetController, private router : Router, private toastr: ToastrCustomService, private modalCtrl: ModalController,private location: LocationStrategy,private homeService: HomeService) {
     history.pushState(null, null, window.location.href);  
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
@@ -48,12 +40,9 @@ export class DashboardPage {
     }
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       this.check = false;
-      this.usersData = res.data;
+      this.usersData = res.data[0];
+      this.getGoldRate();
     });
-  }
-  name(event){
-    console.log();
-    // return event?.name?.charAt(0)
   }
   getData(){
     this.sendHistoryData = [];
@@ -67,32 +56,6 @@ export class DashboardPage {
       this.reciveHistoryData = res.data.recivedHistory.slice(0, 2);
     });
   }
-  navigate(item:any){
-    if(item.id == 1){
-      this.router.navigate(['/admin/tab-nav/profile']); 
-    } else if(item.id == 2){
-      this.router.navigate(['/admin/tab-nav/transfer']); 
-    }else if(item.id == 3){
-      this.router.navigate(['/admin/tab-nav/transaction-history']); 
-    } else {
-      this.openModal(); 
-    }
-
-  }
-
-  async openModal() {
-    const modal = await this.modalCtrl.create({
-      component: TransferModalComponent,
-      componentProps: {
-        users: this.usersData,
-        value: false
-      },
-    });
-   modal.present();
-   modal.onDidDismiss().then((data) => {
-    this.getDashboardData()
-  });
-  }
   checkBalance(){
     this.usersData = [];
     const path = 'api/user/getUser';
@@ -101,7 +64,78 @@ export class DashboardPage {
     }
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       this.check = true;
-      this.usersData = res.data;
+      this.usersData = res.data[0];
     });
+  }
+  getGoldRate(){
+    const path = 'api/XAU/SGD'
+    this.homeService.getGoldMethod(path).pipe(take(1)).subscribe((res: any) => {
+      this.goldData = res.price_gram_18k;
+    });
+  }
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Example header',
+      subHeader: 'Example subheader',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          data: {
+            action: 'delete',
+          },
+        },
+        {
+          text: 'Share',
+          data: {
+            action: 'share',
+          },
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
+
+    const result = await actionSheet.onDidDismiss();
+  }
+
+  onClickSubmit(amt) {
+      if(amt.value > 0){
+        this.goldValue = amt.value / this.goldData;
+        const path = "api/user/amount";
+        let datas = {
+          'amount': amt.value,
+          '_id':localStorage.getItem('_id'),
+          'goldRate': this.goldValue
+        }
+        this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
+          this.toastr.success(res.message);
+          // this.dismissed()
+          this.getDashboardData();
+        });
+       } else {
+         this.toastr.error('Please Enter amount');
+       }
+  }
+
+  numericOnly(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
+    this.toastr.success('User Sucessfully Logged Out');
   }
 }

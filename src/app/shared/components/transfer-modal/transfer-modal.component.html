@@ -1,5 +1,6 @@
 <ion-header>
 	<ion-toolbar>
+    <ion-title>Send Money to {{data?.name}}</ion-title>
     <ion-buttons fill="outline" slot="end">
       <ion-icon name="close-circle-outline" (click)="dismiss()" style="font-size: 40px;cursor: pointer;"></ion-icon>
 		</ion-buttons>
@@ -7,7 +8,53 @@
 </ion-header>
 
 <ion-content>
-  <div class="d-flex justify-content-center h-100">
+          <!-- Send Action Sheet -->
+          <div>
+            <div>
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account2">From</label>
+                                        <input type="email" class="form-control" id="account2"
+                                            placeholder="Enter bank ID" value="{{usersData?.name}}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="text11">To</label>
+                                        <input type="email" class="form-control" id="text11"
+                                            placeholder="Enter bank ID" value="{{data?.name}}" disabled>
+                                        <!-- <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i> -->
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Enter Amount</label>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                        <input type="text" class="form-control" placeholder="Enter an amount"
+                                           #amount (keypress)="numericOnly($event);" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                         (click)="onClickSubmit(amount)">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Send Action Sheet -->
+  <!-- <div class="d-flex justify-content-center h-100">
     <div class="card">
       <div class="card-header">
         <div class="d-flex flex-row justify-content-center mb-1">
@@ -28,7 +75,6 @@
                 value="" #message>
               </ion-textarea>
             </ion-item>
-          <!-- </div> -->
           <div class="form-group">
             <button type="submit" class="btn ionButton float-right mt-2" (click)="onClickSubmit(amount, message)" *ngIf="isTransfer">Transfer Money</button>
             <button type="submit" class="btn ionButton float-right mt-2" (click)="onClickSubmit(amount, message)" *ngIf="!isTransfer">Add Money</button>
@@ -36,5 +82,5 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
 </ion-content>

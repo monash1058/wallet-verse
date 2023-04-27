@@ -39,7 +39,7 @@ export class FcmService  {
     PushNotifications.addListener(
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
+        // alert('Push received: ' + JSON.stringify(notification));
       },
     );
 

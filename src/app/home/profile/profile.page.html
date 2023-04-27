@@ -1,78 +1,220 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-item lines="none">
     <ion-text slot="start" color="light" style="color:black">Welcome, {{usersData?.name}}</ion-text>
     <img src="../../../assets/images/wave.png" style="width: 20px;height: 20px;margin-left: -26px;position: fixed;"/>
     <ion-icon name="log-out-outline"  slot="end" (click)="logout()" style="cursor: pointer;"></ion-icon>
   </ion-item>
-</ion-header>
+</ion-header> -->
 
 <ion-content fullscreen>
-  <div class="container">
-    <!-- <div id="login_title">
-      <img class="logo" src="../../../assets/images/logo.png"/>
-      <h2 class="text">PRO-PAY</h2>
-      <div class="under_login"></div>
-  </div> -->
-    <div class="d-flex justify-content-center">
-      <form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
-      <div class="card">
-        <div class="card-header" style="text-align: center;">
-          <div class="upload-container">
-            <div class="upload-image">
-                <h1 style="margin: 5px 0px 0px 0px;font-size: 50px;">{{usersData?.name?.charAt(0)}}</h1>
-            </div>
-            <!-- <div class="upload-input">
-              <input type="file" id="myfile" name="myfile" accept="image/*" (change)="uploadFile($event.target)">
-              <label for="myfile" class="btn btn-danger btn-sm">Upload Photo</label>
-            </div> -->
-          </div>
-          <!-- <div class="avatar-upload">
-            <div class="avatar-edit">
-              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event.target)" />
-            </div>
-            <div class="avatar-preview">
-              <div id="imagePreview" [style.backgroundImage]="'url('+ imgFile +')'">
-              </div>
-            </div>
-          </div>
-          <label class="btn btn-danger btn-sm" for="imageUpload">Upload Image</label> -->
-        </div>    
-        <h4 style="color: white;">Edit Profile</h4>
-        <div class="card-body">
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-              </div>
-              <ion-input type="text" class="form-control" placeholder="Username" formControlName="name"></ion-input>
-              
-            </div>
-            <div class="input-group form-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i></span>
-              </div>
-              <ion-input type="password" class="form-control" placeholder="Password" formControlName="password"></ion-input>
-            </div>
-            <ion-text 
-            color="danger" 
-            *ngIf="!formData.get('password').valid && formData.get('password').touched">
-            <ion-text
-              class="error"  
-              *ngIf="formData.get('password').hasError('required')">
-              * Please enter your password
-            </ion-text>
-            <ion-text
-              class="error"  
-              *ngIf="!formData.get('password').hasError('required') && formData.get('password').hasError('pattern')">
-              * Password must contain more than 8 characters, 1 upper case letter, and 1 special character
-            </ion-text>
-          </ion-text>
-            <div class="form-group">
-              <button type="submit" [disabled]="formData.invalid" class="btn ionButton btn-sm">Update</button>
-            </div>
-        
-        </div>
+<body>
+     <!-- App He
+      ader -->
+     <div class="appHeader">
+      <!-- <div class="left">
+          <a href="#" class="headerButton goBack">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+          </a>
+      </div> -->
+      <div class="pageTitle">
+          Settings
       </div>
-    </form>
-    </div>
+      <!-- <div class="right">
+          <a href="app-notifications.html" class="headerButton">
+              <ion-icon class="icon" name="notifications-outline"></ion-icon>
+              <span class="badge badge-danger">4</span>
+          </a>
+      </div> -->
   </div>
+  <!-- * App Header -->
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+
+      <div class="section mt-3 text-center">
+          <div class="avatar-section">
+              <a>
+                  <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w100 rounded">
+                  <span class="button">
+                      <ion-icon name="camera-outline"></ion-icon>
+                  </span>
+              </a>
+          </div>
+          <div class="listview-title mt-1">Welcome {{usersData?.name}}</div>
+      </div>
+
+      <div class="listview-title mt-1">Theme</div>
+      <ul class="listview image-listview text inset no-line">
+          <li>
+              <div class="item">
+                  <div class="in">
+                      <div>
+                          Dark Mode
+                      </div>
+                      <div class="form-check form-switch  ms-2">
+                          <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodeSwitch">
+                          <label class="form-check-label" for="darkmodeSwitch"></label>
+                      </div>
+                  </div>
+              </div>
+          </li>
+      </ul>
+
+      <div class="listview-title mt-1">Notifications</div>
+      <ul class="listview image-listview text inset">
+          <li>
+              <div class="item">
+                  <div class="in">
+                      <div>
+                          Payment Alert
+                          <div class="text-muted">
+                              Send notification when new payment received
+                          </div>
+                      </div>
+                      <div class="form-check form-switch  ms-2">
+                          <input class="form-check-input" type="checkbox" id="SwitchCheckDefault1">
+                          <label class="form-check-label" for="SwitchCheckDefault1"></label>
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li>
+              <a class="item">
+                  <div class="in">
+                      <div>Notification Sound</div>
+                      <span class="text-primary">Beep</span>
+                  </div>
+              </a>
+          </li>
+      </ul>
+
+      <div class="listview-title mt-1">Profile Settings</div>
+      <ul class="listview image-listview text inset">
+          <li>
+              <a class="item" style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#userNameandPassword">
+                  <div class="in">
+                      <div>Change Username and Password</div>
+                  </div>
+              </a>
+          </li>
+          <li>
+              <a class="item">
+                  <div class="in">
+                      <div>Update E-mail</div>
+                  </div>
+              </a>
+          </li>
+          <!-- <li>
+              <a href="#" class="item">
+                  <div class="in">
+                      <div>Address</div>
+                      <span class="text-primary">Edit</span>
+                  </div>
+              </a>
+          </li> -->
+          <!-- <li>
+              <div class="item">
+                  <div class="in">
+                      <div>
+                          Private Profile
+                      </div>
+                      <div class="form-check form-switch ms-2">
+                          <input class="form-check-input" type="checkbox" id="SwitchCheckDefault2">
+                          <label class="form-check-label" for="SwitchCheckDefault2"></label>
+                      </div>
+                  </div>
+              </div>
+          </li> -->
+          <li>
+            <a class="item" (click)="logout()" style="cursor: pointer;">
+                <div class="in">
+                    <div>Log out</div>
+                </div>
+            </a>
+        </li>
+      </ul>
+
+      <!-- <div class="listview-title mt-1">Security</div> -->
+      <!-- <ul class="listview image-listview text mb-2 inset">
+          <li>
+              <a href="#" class="item">
+                  <div class="in">
+                      <div>Update Password</div>
+                  </div>
+              </a>
+          </li>
+          <li>
+              <div class="item">
+                  <div class="in">
+                      <div>
+                          2 Step Verification
+                      </div>
+                      <div class="form-check form-switch ms-2">
+                          <input class="form-check-input" type="checkbox" id="SwitchCheckDefault3" checked />
+                          <label class="form-check-label" for="SwitchCheckDefault3"></label>
+                      </div>
+                  </div>
+              </div>
+          </li>
+        
+      </ul> -->
+
+
+  </div>
+
+      <!-- Deposit Action Sheet -->
+      <div class="modal fade action-sheet" id="userNameandPassword" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Profile</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="action-sheet-content">
+                        <form [formGroup]="formData" (ngSubmit)="onClickSubmit()">
+                            <div class="form-group basic">
+                                <div class="input-wrapper">
+                                    <label class="label" for="account1">Account</label>
+                                    <input type="text" class="form-control" placeholder="Enter User Name"
+                                    formControlName="name" required value="{{usersData?.name}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group basic">
+                                <label class="label">Password</label>
+                                <div class="input-group mb-2">
+                                    <!-- <span class="input-group-text" id="basic-addona1">$</span> -->
+                                    <input type="text" class="form-control" placeholder="Update Password"
+                                    formControlName="password" required>
+                                </div>
+                                <ion-text 
+                                color="danger" 
+                                *ngIf="!formData.get('password').valid && formData.get('password').touched">
+                                <ion-text
+                                  class="error"  
+                                  *ngIf="formData.get('password').hasError('required')">
+                                  * Please enter your password
+                                </ion-text>
+                                <ion-text
+                                  class="error"  
+                                  *ngIf="!formData.get('password').hasError('required') && formData.get('password').hasError('pattern')">
+                                  * Password must contain more than 8 characters, 1 upper case letter, and 1 special character
+                                </ion-text>
+                              </ion-text>
+                            </div>
+
+
+                            <div class="form-group basic">
+                                <button class="btn btn-primary btn-block btn-lg"
+                                type="submit" [disabled]="formData.invalid" data-bs-dismiss="modal">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- * Deposit Action Sheet -->
+</body>
+
 </ion-content>
