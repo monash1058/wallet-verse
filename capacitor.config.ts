@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'wallet-app',
+  appName: 'Pro-pay',
   webDir: 'www',
   bundledWebRuntime: false,
   plugins: {

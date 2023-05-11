@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   constructor(private fcmService: FcmService, private authService: AuthService, private toastr: ToastrCustomService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
-    // this.fcmService.initPush(); 
+    this.fcmService.initPush(); 
     this.formData = this.fb.group({
       mob: ['', [Validators.required, Validators.pattern("^((\\+65-?)|0)?[0-9]{8}$")]],
       password: ['', [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$#!_%*?&])[A-Za-z\d$@$!%*?&].{7,30}")]]

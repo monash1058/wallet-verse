@@ -399,6 +399,7 @@
                         </div>
                         <div class="right">
                             <div class="price text-success"> + {{'$' + transaction?.amount}}</div>
+                            <div class="price text-success"> + {{transaction?.goldRate  | number:'1.0-3'}}</div>
                         </div>
                     </a>
                    

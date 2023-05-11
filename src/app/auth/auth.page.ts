@@ -9,7 +9,7 @@ import { FcmService } from '../shared/service/fcm.service';
 export class AuthPage implements OnInit {
 
   constructor(private fcmService: FcmService) {
-    // this.fcmService.initPush(); 
+    this.fcmService.initPush(); 
   }
 
   ngOnInit() {

@@ -19,8 +19,8 @@ export class AppComponent {
     public alertController: AlertController,
     private platform: Platform
   ) {
-    // this.initializeApp()
-    // this.fcmService.initPush()
+    this.initializeApp()
+    this.fcmService.initPush()
   }
 
   ngOnInit(): void {

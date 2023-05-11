@@ -33,7 +33,6 @@ export class DashboardPage {
     this.getData();
   }
   getDashboardData(){
-    this.usersData = [];
     const path = 'api/user/getUser';
     let datas = {
       '_id':localStorage.getItem('_id')
@@ -57,7 +56,6 @@ export class DashboardPage {
     });
   }
   checkBalance(){
-    this.usersData = [];
     const path = 'api/user/getUser';
     let datas = {
       '_id':localStorage.getItem('_id')
@@ -65,6 +63,7 @@ export class DashboardPage {
     this.homeService.postMethod(path, datas).pipe(take(1)).subscribe((res: any) => {
       this.check = true;
       this.usersData = res.data[0];
+      // this.getDashboardData();
     });
   }
   getGoldRate(){

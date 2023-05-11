@@ -16,3 +16,21 @@
         color: green;
     }
   }
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+  
+  img.gcoin {
+    display: inline-block;
+    vertical-align: middle;
+    width: 33px;
+    height: 35px;
+    margin-right: 6px;
+  }
+  
+  span {
+    display: inline-block;
+    margin-top: 11px;
+  }

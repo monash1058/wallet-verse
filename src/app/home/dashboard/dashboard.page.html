@@ -40,7 +40,7 @@
                     <!-- Balance -->
                     <div class="balance">
                         <div class="left">
-                            <span class="title">Total Balance</span>
+                            <span class="title">Balance</span>
                             <h1 class="total" *ngIf="!check">$ ***</h1>
                             <h1 class="total" *ngIf="check">$ {{usersData?.amount}}</h1>
                             
@@ -51,8 +51,11 @@
                         </div>
                         <div class="right">
                             <div class="left">
-                                <span class="title">Gold Points</span>
-                                <h1 class="total">{{usersData?.goldRate | number:'1.0-3'}}</h1>
+                                <div class="container">
+                                    <img src="../../../assets/images/icon.png" class="gcoin"/>
+                                    <span class="title">Gcoin</span>
+                                  </div>
+                                <h1 class="total" style="padding-left: 10px;">{{usersData?.goldRate | number:'1.0-3'}}</h1>
                                 
                             </div>
                             <!-- <a href="#" class="button" data-bs-toggle="modal" data-bs-target="#depositActionSheet" data-backdrop="false">
@@ -69,7 +72,7 @@
                                 <div class="icon-wrapper bg-danger">
                                     <ion-icon name="arrow-down-outline"></ion-icon>
                                 </div>
-                                <strong>Withdraw</strong>
+                                <strong>Pay</strong>
                             </a>
                         </div>
                         <div class="item">
@@ -78,7 +81,7 @@
                                 <div class="icon-wrapper">
                                     <ion-icon name="arrow-forward-outline"></ion-icon>
                                 </div>
-                                <strong>Send</strong>
+                                <strong>Transfer</strong>
                             </a>
                         </div>
                         <div class="item">
@@ -87,7 +90,7 @@
                                 <div class="icon-wrapper bg-success">
                                     <ion-icon name="card-outline"></ion-icon>
                                 </div>
-                                <strong>Cards</strong>
+                                <strong>Bill</strong>
                             </a>
                         </div>
                         <div class="item">
@@ -96,7 +99,7 @@
                                 <div class="icon-wrapper bg-warning">
                                     <ion-icon name="add-outline"></ion-icon>
                                 </div>
-                                <strong>Add Money</strong>
+                                <strong>Credit</strong>
                             </a>
                         </div>
 
